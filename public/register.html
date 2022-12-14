@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="css/register.css">
+    <script src="js/register.js"></script>
+</head>
+
+<body>
+    <!-- 大盒子  背景开始 -->
+    <div class="max">
+        <!-- 中间盒子内容部分 -->
+        <div class="count">
+            <!-- 左边盒子部分 -->
+            <div class="left">
+                <p>Welcome</p>
+                <p>注册Floda，开启新美丽</p>
+            </div>
+            <!-- 右边盒子部分 -->
+            <div class="right">
+                <div class="enroll">
+                    <span class="xin">新用户注册</span>
+                    <span class="yi">已有帐号，</span>
+                    <a href="login.html">立即登录</a>
+                </div>
+                <form class="big" method="post" action="http://127.0.0.1:3000/admin/register">
+                    <div class="eye">
+                        <img src="https://img.js.design/assets/img/62b282baf59c9f23db7e6368.png" alt="">
+                    </div>
+                    <input type="text" name="name" placeholder="请输入用户名" class="username">
+                    <p class="p-1 ">取一个你自己喜欢的用户名吧</p>
+                    <input type="password" name="password" placeholder="请输入密码" class="password">
+                    <p class="p-2">至少包含数字、字母、符号中的2种</p>
+                    <p class="p-3">请输入长度在8~16位之间的密码</p>
+                    <input type="password" name="password2" placeholder="确认密码" class="password">
+                    <p class="p-4 ">两次输入的密码要一致</p>
+                    <p class="sex-text">
+                        绅士:<input type="radio" name="sex" value="男">
+                        女士:<input type="radio" name="sex" value="女">
+                    </p>
+                    <button type="submit" class="dlanniu">立即注册</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 注册页面结束 -->
+</body>
+<script>
+    
+</script>
+</html>

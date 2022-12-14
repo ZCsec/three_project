@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.max {
+    width: 100%;
+    height: 826px;
+    background: url('../img/slider/home2-slide1.jpg') no-repeat;
+    background-size: 1920px 1080px;
+    padding-top: 180px;
+}
+
+.count {
+    width: 1280px;
+    height: 640px;
+    margin: 0 auto;
+    box-shadow: 2px 2px 30px 8px rgba(0, 0, 0, .2)
+}
+
+.left {
+    float: left;
+    width: 640px;
+    height: 410px;
+    background-color: white;
+    backdrop-filter: blur(3px);
+    padding-top: 230px;
+}
+
+.left p {
+    color: #CC2121;
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.right {
+    float: left;
+    width: 640px;
+    height: 620px;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding-top: 20px;
+}
+
+
+
+.right .big {
+    position: relative;
+    width: 400px;
+    margin: 140px 0 0 120px;
+}
+
+.big .yanzhengma {
+    position: absolute;
+    top: 142px;
+    right: 0;
+    width: 160px;
+    height: 50px;
+    background: url('https://img.js.design/assets/img/62b2b197f7713c775242e9b9.png') no-repeat;
+    background-size: 160px 50px;
+}
+
+.right .eye {
+    position: absolute;
+    top: 85px;
+    right: 13px;
+    cursor: pointer;
+
+}
+
+.right .eye img {
+    width: 26px;
+    height: 26px;
+}
+
+.right .username {
+    display: block;
+    width: 400px;
+    text-indent: 1.8em;
+    height: 38px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    margin-bottom: 40px;
+    background: url('https://img.js.design/assets/img/62b280c6e6f2742ff25cf76a.png') no-repeat 5px 8px;
+    background-size: 20px;
+}
+
+.right .password {
+    display: block;
+    width: 400px;
+    height: 38px;
+    font-size: 18px;
+    text-indent: 1.8em;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    margin-bottom: 40px;
+    background: url('https://img.js.design/assets/img/62b28222e6f2745aa45d3e3a.png') no-repeat 5px 8px;
+    background-size: 20px;
+}
+
+.right .verify {
+    display: block;
+    width: 220px;
+    height: 38px;
+    font-size: 18px;
+    text-indent: 1.8em;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    margin-bottom: 40px;
+    background: url('https://img.js.design/assets/img/62b2825792fb882a37255f2b.png') no-repeat 5px 8px;
+    background-size: 20px;
+}
+
+.right .dlanniu {
+    display: block;
+    width: 380px;
+    height: 60px;
+    background-color: rgba(240, 1, 230, 0.2);
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    line-height: 60px;
+    text-decoration: none;
+    margin-top: 40px;
+}
+
+.right .enroll a {
+    font-size: 16px;
+    color: pink;
+}
+
+.right .xin {
+    font-size: 30px;
+    font-weight: 700;
+    color: #CC2121;
+    margin-left: 30px;
+}
+
+.right .yi {
+    font-size: 16px;
+    margin-left: 290px;
+}

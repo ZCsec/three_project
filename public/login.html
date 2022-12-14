@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="css/login.css">
+    <script src="js/login.js"></script>
+</head>
+
+<body>
+    <!-- 大盒子背景 -->
+    <div class="max">
+        <!-- 中间内容盒子部分 -->
+        <div class="count">
+            <!-- 左边盒子部分 -->
+            <div class="left">
+                <p>Welcome</p>
+                <p>登录Floda,享受美</p>
+            </div>
+            <!-- 右边盒子 -->
+            <div class="right">
+                <div class="enroll">
+                    <span class="xin">登录界面</span>
+                    <span class="yi">未注册帐号，</span>
+                    <a href="register.html">立即注册</a>
+                </div>
+                <div class="big">
+                    <form method="post" action="http://127.0.0.1:3000/admin/login">
+                        <div class="eye">
+                            <img src="https://img.js.design/assets/img/62b282baf59c9f23db7e6368.png" alt="">
+                        </div>
+                        <input type="text" name="name" placeholder="请输入用户名" class="username">
+                        <input type="password" name="password" placeholder="请输入密码" class="password">
+                        <input type="checkbox" class="check">
+                        <span>记住密码</span>
+                        <button type="submit" class="dlanniu" >登录</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 登录页面结束 -->
+</body>
+
+</html>

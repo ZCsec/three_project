@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floda首页</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="../static/css/swiper.min.css">
+
+    <!-- Demo styles -->
+    <style>
+        .backTop {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #CC2121;
+            text-align: center;
+            position: fixed;
+            right: 2%;
+            bottom: 20%;
+            z-index: 9999999;
+            display: none;
+        }
+
+        .backTop:hover{
+            background-color: #111;
+            transition: all .5s;
+        }
+
+        .lbo .swiper-container {
+            width: 100%;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .lbo .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .lbo .swiper-container img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lbo-main span {
+            position: absolute;
+            display: block;
+            color: #CC2121;
+            font-size: 30px;
+            line-height: 1.2;
+            padding-bottom: 15px;
+            text-transform: capitalize;
+            font-family: "Yesteryear", cursive;
+            top: 20%;
+            left: 5%;
+        }
+
+        .lbo-main h1,
+        .lbo-main h2 {
+            position: absolute;
+            color: #111;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.1;
+            text-transform: capitalize;
+
+        }
+
+        .lbo-main h1 {
+            left: 5%;
+            top: 30%;
+        }
+
+        .lbo-main h2 {
+            left: 5%;
+            top: 40%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .btn-hero {
+            position: absolute;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1;
+            padding: 18px 36px;
+            border-radius: 3px;
+            display: inline-block;
+            background-color: #CC2121;
+            text-transform: capitalize;
+            border-radius: 0;
+            left: 8%;
+            top: 55%;
+        }
+
+        .swiper-pagination,
+        .swiper-button-next,
+        .swiper-button-prev {
+            display: none;
+        }
+
+        .foot li a:hover {
+            color: #CC2121;
+            transform: translateX(10px);
+            transition: all 0.5s linear;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 头部欢迎、语言选择、支付货币选择部分 -->
+        <div class="header-top">
+            <!-- 欢迎 -->
+            <div class="head-left">
+                <p>欢迎来到Floda线上商店!</p>
+            </div>
+            <div class="head-right">
+                <!-- 语言选择 -->
+                <ul class="lang">
+                    <li>
+                        <span>语言</span>
+                        <img src="../static/img/icon/en.png">
+                        英文
+                        <ul class="yc1">
+                            <li>
+                                <a href="#">
+                                    <img src="../static/img/icon/en.png" alt="">&nbsp;英文
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="../static/img/icon/fr.png" alt="">&nbsp;法语
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 货币选择 -->
+                    <li>
+                        <span>支付货币</span>
+                        美元$
+                        <ul class="yc2">
+                            <li>
+                                <a href="#">
+                                    &nbsp;美元$
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    &nbsp;欧元€
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="top-main">
+            <!-- logo -->
+            <div class="logo">
+                <a href="#">
+                    <img src="../static/img/logo/logo.png">
+                </a>
+            </div>
+            <div class="top-main-mid">
+                <!-- 导航栏 -->
+                <ul class="nav">
+                    <li>
+                        <a href="../static/index.html">
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../static/goodslist.html">
+                            花店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../static/details.html">
+                            产品细节
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-main-right">
+                <!-- 搜索、个人、喜欢、购物车 -->
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="sous">
+                                <img src="../static/img/搜索.png" alt="" width="60%">
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="self">
+                                <img src="../static/img/个人.png" alt="" width="60%">
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../static/cart.html">
+                            <i class="cart">
+                                <img src="../static/img/购物车.png" alt="" width="60%">
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 轮播图 -->
+    <div class="lbo">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="img/slider/home1-slide1.jpg">
+                    <div class="lbo-main">
+                        <span>情人节礼物</span>
+                        <h1>Fresh Your Mind</h1>
+                        <h2>&amp; Feeling love</h2>
+                        <a href="shop.html" class="btn-hero" tabindex="-1">立即下单</a>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <img src="img/slider/home1-slide2.jpg">
+                    <div class="lbo-main">
+                        <span>情人节礼物</span>
+                        <h1>Fresh Your Mind</h1>
+                        <h2>&amp; Feeling love</h2>
+                        <a href="shop.html" class="btn-hero" tabindex="-1">立即下单</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+    <div class="container1">
+        <!-- 主题鲜花 -->
+        <div class="floda1">
+            <a href="#">
+                <img src="../static/img/banner/img1-top-floda1.jpg">
+            </a>
+            <div class="banner-content">
+                <h2 class="text1">华丽鲜花</h2>
+                <h2 class="text2">爱意永恒</h2>
+                <a class="store-link" href="#">立即购买</a>
+            </div>
+        </div>
+        <div class="floda1">
+            <a href="#">
+                <img src="../static/img/banner/img1-top-floda2.jpg">
+            </a>
+            <div class="banner-content">
+                <h2 class="text1">黑色情人节</h2>
+                <h2 class="text2">致孤单的自己</h2>
+                <a class="store-link" href="#">立即购买</a>
+            </div>
+        </div>
+        <div class="floda1">
+            <a href="#">
+                <img src="../static/img/banner/img1-top-floda3.jpg">
+            </a>
+            <div class="banner-content">
+                <h2 class="text1">刹那烟火</h2>
+                <h2 class="text2">盛开就会凋落</h2>
+                <a class="store-link" href="#">立即购买</a>
+            </div>
+        </div>
+    </div>
+    <!-- 线上服务保障 -->
+    <div class="container2">
+        <div class="service">
+            <img src="../static/img/icon/free_shipping.png" alt="">
+            <h5>包邮服务</h5>
+            <p>所有订单均免运费</p>
+        </div>
+        <div class="service">
+            <img src="img/icon/support247.png" alt="">
+            <h5>24小时在线</h5>
+            <p>24小时全天候为您服务</p>
+        </div>
+        <div class="service">
+            <img src="img/icon/money_back.png" alt="">
+            <h5>售后保障</h5>
+            <p>15天内免费退换</p>
+        </div>
+        <div class="service">
+            <img src="img/icon/promotions.png" alt="">
+            <h5>订单优惠</h5>
+            <p>每单超过80享有对应优惠</p>
+        </div>
+    </div>
+    <!-- 新产品模块 -->
+    <div class="newpdt">
+        <div class="newpdt-tit">
+            <h2>全新产品</h2>
+            <p>Accumsan vitae pede lacus ut ullamcorper sollicitudin quisque libero</p>
+        </div>
+        <div class="product-item">
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-1.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    初恋
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="discount">
+                    <span>30%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-3.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    幸福之约
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:;">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-5.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    永恒回忆
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-7.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    缘分天空
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="discount">
+                    <span>15%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-9.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    温暖阳光
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="discount">
+                    <span>30%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-11.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    粉色公主
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="discount">
+                    <span>12%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-2.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    如约而至
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="discount">
+                    <span>10%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-4.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    唯一
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="discount">
+                    <span>10%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 查看更多新产品 -->
+        <div class="more-new">
+            <a href="../static/details.html">查看更多</a>
+        </div>
+    </div>
+
+    <!-- 郁金香和礼盒 -->
+    <div class="banner">
+        <div class="banner-left">
+            <div class="banner-item">
+                <a href="#">
+                    <img src="../static/img/banner/banner-1.jpg" alt="">
+                </a>
+            </div>
+            <div class="main-content">
+                <h2 class="text1">致爱人</h2>
+                <h2 class="text2">郁 金 香</h2>
+                <a class="store-link" href="#">立即购买</a>
+            </div>
+        </div>
+        <div class="banner-right">
+            <div class="banner-item">
+                <a href="#">
+                    <img src="../static/img/banner/banner-2.jpg" alt="">
+                </a>
+            </div>
+            <div class="main-content">
+                <h2 class="text1">节日礼盒</h2>
+                <h2 class="text2">花 & 礼盒</h2>
+                <a class="store-link" href="#">立即购买</a>
+            </div>
+        </div>
+    </div>
+    <!-- 销量最好 -->
+    <div class="top-seller">
+
+        <div class="top-seller-tit">
+            <h2>销量最高</h2>
+            <p>Accumsan vitae pede lacus ut ullamcorper sollicitudin quisque libero</p>
+        </div>
+        <!-- 展示页 -->
+        <div class="top-show">
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-9.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    温暖阳光
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-10.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    玫瑰之约
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="discount">
+                    <span>10%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="../static/product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-11.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    粉色公主
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="discount">
+                    <span>15%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+            <div class="product-item1">
+                <a href="#">
+                    <img src="../static/img/product/product-12.jpg" alt="">
+                </a>
+                <a href="#" class="product-name">
+                    姹紫嫣红
+                </a>
+                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <div class="new">
+                    <span>new</span>
+                </div>
+                <div class="discount">
+                    <span>10%</span>
+                </div>
+                <div class="addcar">
+                    <a href="javascript:">
+                        <img src="../static/img/购物车.png" style="border: none;">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 尾部信息 -->
+    <div class="foot">
+        <div class="foot-left">
+            <!-- 联系方式 -->
+            <ul class="aboutus">
+                <h5>联系方式</h5>
+                <li class="address">
+                    地址 :
+                    澳大利亚维多利亚州圣奥尔本斯大街
+                </li>
+                <li class="email">
+                    邮箱 :
+                    <a href="mailto:test@yourdomain.com">&nbsp;yourmail@gmail.com</a>
+                </li>
+                <li class="phone">
+                    电话 :
+                    <a href="tel:(012)800456789-987">&nbsp;(012) 800 456 789-987</a>
+                </li>
+            </ul>
+            <img src="../static/img/payment-pic.png" alt="">
+        </div>
+        <!-- 服务和关于我们 -->
+        <div class="foot-mid">
+            <ul class="mid-main">
+                <h5>服务类型</h5>
+                <li><a href="#">电子商务</a></li>
+                <li><a href="#">shopify</a></li>
+                <li><a href="#">Prestashop</a></li>
+                <li><a href="#">Opencart</a></li>
+                <li><a href="#">线上购物</a></li>
+            </ul>
+            <ul class="mid-main">
+                <h5>关于我们</h5>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">客服</a></li>
+                <li><a href="#">航运</a></li>
+            </ul>
+        </div>
+        <!-- 快速访问 -->
+        <div class="foot-right">
+            <ul class="right-main">
+                <h5>快速访问</h5>
+                <li><a href="#">存储位置</a></li>
+                <li><a href="#">我的账户</a></li>
+                <li><a href="#">订单跟踪</a></li>
+                <li><a href="#">订花技巧</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+    <a href="javascript:" class="backTop">
+        <img src="../static/img/箭头 上.png" width="50%" style="position: relative;top: 10px;">
+    </a>
+    <!-- Swiper JS -->
+    <script src="../static/js/swiper.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            nextButton: '.swiper-button-next',
+            prevButton: '.swiper-button-prev',
+            slidesPerView: 1,
+            paginationClickable: true,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: 2000
+        });
+        //鼠标覆盖停止自动切换
+        swiper.container[0].onmouseover = function () {
+            swiper.stopAutoplay();
+        }
+        //鼠标移出开始自动切换
+        swiper.container[0].onmouseout = function () {
+            swiper.startAutoplay();
+        }
+        // .swiper-pagination,
+        // .swiper-button-next,
+        // .swiper-button-prev
+        var swiper_container = document.querySelector(".swiper-container")
+        var swiper_pagination = document.querySelector(".swiper-pagination")
+        var swiper_button_next = document.querySelector(".swiper-button-next")
+        var swiper_button_prev = document.querySelector(".swiper-button-prev")
+        swiper_container.addEventListener("mouseover", function () {
+            swiper_pagination.style.display = "block"
+            swiper_button_next.style.display = "block"
+            swiper_button_prev.style.display = "block"
+        })
+
+        swiper_container.addEventListener("mouseout", function () {
+            swiper_pagination.style.display = "none"
+            swiper_button_next.style.display = "none"
+            swiper_button_prev.style.display = "none"
+        })
+
+        var container1 = document.querySelector(".container1")
+        container1.addEventListener("mouseover", function (e) {
+            if (e.target.nodeName == "IMG") {
+                e.target.parentNode.style.opacity = 0.5
+            }
+        })
+        container1.addEventListener("mouseout", function (e) {
+            if (e.target.nodeName == "IMG") {
+                e.target.parentNode.style.opacity = 1
+            }
+        })
+        var header = document.querySelector(".top-main");
+        var backTop = document.querySelector(".backTop")
+        window.addEventListener("scroll", function () {
+            var topScroll = document.body.scrollTop || document.documentElement.scrollTop;//滚动的距离,距离顶部的距离
+            var space = document.querySelector(".lbo");
+            var spaceOffsetHeight = space.offsetTop
+            console.log(spaceOffsetHeight, 'navOffsetHeight')
+            if (topScroll > spaceOffsetHeight) {
+                header.style.position = 'fixed';
+                header.style.top = '0';
+                header.style.zIndex = '9999';
+                header.style.backgroundColor = "white"
+                header.style.width = "100%"
+                backTop.style.display = "block"
+            } else {
+                header.style.position = 'static';
+                backTop.style.display = "none"
+            }
+        })
+
+        backTop.addEventListener("click", function () {
+            //toTop 滚动到顶部
+            var currentPosition, timer;
+            var speed = 10;
+            timer = setInterval(function () {
+                currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+                currentPosition -= speed; //speed变量
+                if (currentPosition > 0) {
+                    window.scrollTo(0, currentPosition);
+                } else {
+                    window.scrollTo(0, 0);
+                    clearInterval(timer);
+                }
+            }, 1);
+        })
+    </script>
+</body>
+
+
+</html>
