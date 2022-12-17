@@ -192,17 +192,17 @@
                 <!-- 导航栏 -->
                 <ul class="nav">
                     <li>
-                        <a href="../static/index.html">
+                        <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
                             首页
                         </a>
                     </li>
                     <li>
-                        <a href="../static/goodslist.html">
+                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}">
                             花店
                         </a>
                     </li>
                     <li>
-                        <a href="../static/details.html">
+                        <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId=1&userType={{userType}}&userId={{userId}}">
                             产品细节
                         </a>
                     </li>
@@ -218,15 +218,15 @@
                             </i>
                         </a>
                     </li>
-                    <li>
-                        <a href="login.html">
+                    <li>                   
+                        <a href="login.html" style="display:{{userType==1?"none":"inline-block"}}">
                             <i class="self">
                                 <img src="../static/img/个人.png" alt="" width="60%">
                             </i>
                         </a>
                     </li>
                     <li>
-                        <a href="../static/cart.html">
+                        <a href="http://127.0.0.1:3000/admin/getShopCart?userId={{userId}}&userType={{userType}}">
                             <i class="cart">
                                 <img src="../static/img/购物车.png" alt="" width="60%">
                             </i>
@@ -241,21 +241,21 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="img/slider/home1-slide1.jpg">
+                    <img src="../static/img/slider/home1-slide1.jpg">
                     <div class="lbo-main">
                         <span>情人节礼物</span>
                         <h1>Fresh Your Mind</h1>
                         <h2>&amp; Feeling love</h2>
-                        <a href="shop.html" class="btn-hero" tabindex="-1">立即下单</a>
+                        <a href="../static/goodslist.html" class="btn-hero" tabindex="-1">立即下单</a>
                     </div>
                 </div>
                 <div class="swiper-slide">
-                    <img src="img/slider/home1-slide2.jpg">
+                    <img src="../static/img/slider/home1-slide2.jpg">
                     <div class="lbo-main">
                         <span>情人节礼物</span>
                         <h1>Fresh Your Mind</h1>
                         <h2>&amp; Feeling love</h2>
-                        <a href="shop.html" class="btn-hero" tabindex="-1">立即下单</a>
+                        <a href="../static/goodslist.html" class="btn-hero" tabindex="-1">立即下单</a>
                     </div>
                 </div>
             </div>
@@ -275,7 +275,7 @@
             <div class="banner-content">
                 <h2 class="text1">华丽鲜花</h2>
                 <h2 class="text2">爱意永恒</h2>
-                <a class="store-link" href="#">立即购买</a>
+                <a class="store-link" href="../static/goodslist.html">立即购买</a>
             </div>
         </div>
         <div class="floda1">
@@ -285,7 +285,7 @@
             <div class="banner-content">
                 <h2 class="text1">黑色情人节</h2>
                 <h2 class="text2">致孤单的自己</h2>
-                <a class="store-link" href="#">立即购买</a>
+                <a class="store-link" href="../static/goodslist.html">立即购买</a>
             </div>
         </div>
         <div class="floda1">
@@ -295,7 +295,7 @@
             <div class="banner-content">
                 <h2 class="text1">刹那烟火</h2>
                 <h2 class="text2">盛开就会凋落</h2>
-                <a class="store-link" href="#">立即购买</a>
+                <a class="store-link" href="../static/goodslist.html">立即购买</a>
             </div>
         </div>
     </div>
@@ -307,17 +307,17 @@
             <p>所有订单均免运费</p>
         </div>
         <div class="service">
-            <img src="img/icon/support247.png" alt="">
+            <img src="../static/img/icon/support247.png" alt="">
             <h5>24小时在线</h5>
             <p>24小时全天候为您服务</p>
         </div>
         <div class="service">
-            <img src="img/icon/money_back.png" alt="">
+            <img src="../static/img/icon/money_back.png" alt="">
             <h5>售后保障</h5>
             <p>15天内免费退换</p>
         </div>
         <div class="service">
-            <img src="img/icon/promotions.png" alt="">
+            <img src="../static/img/icon/promotions.png" alt="">
             <h5>订单优惠</h5>
             <p>每单超过80享有对应优惠</p>
         </div>
@@ -329,14 +329,17 @@
             <p>Accumsan vitae pede lacus ut ullamcorper sollicitudin quisque libero</p>
         </div>
         <div class="product-item">
+            <!-- 循环模板 -->
+            {{each goods}}
             <div class="product-item1">
-                <a href="#">
-                    <img src="../static/img/product/product-1.jpg" alt="">
+                <!-- 要做一个商品详情也模板 根据每个不同的商品编号进入不同的商品详情页 -->
+                <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}" >
+                    <img src="../static/img/product/{{$value.goodsImgSrc}}" alt="">
                 </a>
-                <a href="#" class="product-name">
-                    初恋
+                <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}" class="product-name">
+                    {{$value.goodsName}}
                 </a>
-                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                <span class="price-regular">${{$value.goodsPrice}} <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
                 <div class="new">
                     <span>new</span>
                 </div>
@@ -344,142 +347,12 @@
                     <span>30%</span>
                 </div>
                 <div class="addcar">
-                    <a href="javascript:">
+                    <a href=href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}} ">
                         <img src="../static/img/购物车.png" style="border: none;">
                     </a>
                 </div>
             </div>
-            <div class="product-item1">
-                <a href="#">
-                    <img src="../static/img/product/product-3.jpg" alt="">
-                </a>
-                <a href="#" class="product-name">
-                    幸福之约
-                </a>
-                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
-                <div class="new">
-                    <span>new</span>
-                </div>
-                <div class="addcar">
-                    <a href="javascript:;">
-                        <img src="../static/img/购物车.png" style="border: none;">
-                    </a>
-                </div>
-            </div>
-            <div class="product-item1">
-                <a href="#">
-                    <img src="../static/img/product/product-5.jpg" alt="">
-                </a>
-                <a href="#" class="product-name">
-                    永恒回忆
-                </a>
-                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
-                <div class="new">
-                    <span>new</span>
-                </div>
-                <div class="addcar">
-                    <a href="javascript:">
-                        <img src="../static/img/购物车.png" style="border: none;">
-                    </a>
-                </div>
-            </div>
-            <div class="product-item1">
-                <a href="#">
-                    <img src="../static/img/product/product-7.jpg" alt="">
-                </a>
-                <a href="#" class="product-name">
-                    缘分天空
-                </a>
-                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
-                <div class="new">
-                    <span>new</span>
-                </div>
-                <div class="discount">
-                    <span>15%</span>
-                </div>
-                <div class="addcar">
-                    <a href="javascript:">
-                        <img src="../static/img/购物车.png" style="border: none;">
-                    </a>
-                </div>
-            </div>
-            <div class="product-item1">
-                <a href="#">
-                    <img src="../static/img/product/product-9.jpg" alt="">
-                </a>
-                <a href="#" class="product-name">
-                    温暖阳光
-                </a>
-                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
-                <div class="new">
-                    <span>new</span>
-                </div>
-                <div class="discount">
-                    <span>30%</span>
-                </div>
-                <div class="addcar">
-                    <a href="javascript:">
-                        <img src="../static/img/购物车.png" style="border: none;">
-                    </a>
-                </div>
-            </div>
-            <div class="product-item1">
-                <a href="#">
-                    <img src="../static/img/product/product-11.jpg" alt="">
-                </a>
-                <a href="#" class="product-name">
-                    粉色公主
-                </a>
-                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
-                <div class="new">
-                    <span>new</span>
-                </div>
-                <div class="discount">
-                    <span>12%</span>
-                </div>
-                <div class="addcar">
-                    <a href="javascript:">
-                        <img src="../static/img/购物车.png" style="border: none;">
-                    </a>
-                </div>
-            </div>
-            <div class="product-item1">
-                <a href="#">
-                    <img src="../static/img/product/product-2.jpg" alt="">
-                </a>
-                <a href="#" class="product-name">
-                    如约而至
-                </a>
-                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
-                <div class="new">
-                    <span>new</span>
-                </div>
-                <div class="discount">
-                    <span>10%</span>
-                </div>
-                <div class="addcar">
-                    <a href="javascript:">
-                        <img src="../static/img/购物车.png" style="border: none;">
-                    </a>
-                </div>
-            </div>
-            <div class="product-item1">
-                <a href="#">
-                    <img src="../static/img/product/product-4.jpg" alt="">
-                </a>
-                <a href="#" class="product-name">
-                    唯一
-                </a>
-                <span class="price-regular">$60.00 <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
-                <div class="discount">
-                    <span>10%</span>
-                </div>
-                <div class="addcar">
-                    <a href="javascript:">
-                        <img src="../static/img/购物车.png" style="border: none;">
-                    </a>
-                </div>
-            </div>
+            {{/each}}
         </div>
 
         <!-- 查看更多新产品 -->
@@ -492,26 +365,26 @@
     <div class="banner">
         <div class="banner-left">
             <div class="banner-item">
-                <a href="#">
+                <a href="javascript:;">
                     <img src="../static/img/banner/banner-1.jpg" alt="">
                 </a>
             </div>
             <div class="main-content">
                 <h2 class="text1">致爱人</h2>
                 <h2 class="text2">郁 金 香</h2>
-                <a class="store-link" href="#">立即购买</a>
+                <a class="store-link" href="../static/goodslist.html">立即购买</a>
             </div>
         </div>
         <div class="banner-right">
             <div class="banner-item">
-                <a href="#">
+                <a href="javascript:;">
                     <img src="../static/img/banner/banner-2.jpg" alt="">
                 </a>
             </div>
             <div class="main-content">
                 <h2 class="text1">节日礼盒</h2>
                 <h2 class="text2">花 & 礼盒</h2>
-                <a class="store-link" href="#">立即购买</a>
+                <a class="store-link" href="../static/goodslist.html">立即购买</a>
             </div>
         </div>
     </div>
@@ -561,7 +434,7 @@
                     </a>
                 </div>
             </div>
-            <div class="../static/product-item1">
+            <div class="product-item1">
                 <a href="#">
                     <img src="../static/img/product/product-11.jpg" alt="">
                 </a>

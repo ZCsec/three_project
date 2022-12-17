@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/layui.css" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <style>
+        .backTop {
+            display: block;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: blueviolet;
+            text-align: center;
+            position: fixed;
+            right: 2%;
+            bottom: 20%;
+            z-index: 9999999;
+            display: none;
+        }
+
+        .sy {
+            display: block;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sy img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 头部欢迎、语言选择、支付货币选择部分 -->
+        <div class="header-top">
+            <!-- 欢迎 -->
+            <div class="head-left">
+                <p>欢迎来到Floda线上商店!</p>
+            </div>
+            <div class="head-right">
+                <!-- 语言选择 -->
+                <ul class="lang">
+                    <li>
+                        <span>语言</span>
+                        <img src="../static/img/icon/en.png">
+                        英文
+                        <ul class="yc1">
+                            <li>
+                                <a href="#">
+                                    <img src="../static/img/icon/en.png" alt="">&nbsp;英文
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="../static/img/icon/fr.png" alt="">&nbsp;法语
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 货币选择 -->
+                    <li>
+                        <span>支付货币</span>
+                        美元$
+                        <ul class="yc2">
+                            <li>
+                                <a href="#">
+                                    &nbsp;美元$
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    &nbsp;欧元€
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="top-main">
+            <!-- logo -->
+            <div class="logo">
+                <a href="#">
+                    <img src="../static/img/logo/logo.png">
+                </a>
+            </div>
+            <div class="top-main-mid">
+                <!-- 导航栏 -->
+                <ul class="nav">
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/goodList?&userType={{userType}}&userId={{userId}}">
+                            花店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId=1&userType={{userType}}&userId={{userId}}">
+                            产品细节
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-main-right">
+                <!-- 搜索、个人、喜欢、购物车 -->
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="sous">
+                                <img src="../static/img/搜索.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                    <li  style="display:{{userId!="null"?"none":"inline-block"}}">
+                        <a href="http://127.0.0.1:3000/static/login.html">
+                            <i class="self">
+                                <img src="../static/img/个人.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                    <li style="display:{{userId!="null"?"none":"inline-block"}}">
+                        <a href="http://127.0.0.1:3000/static/login.html">
+                            <i class="cart">
+                                <img src="../static/img/购物车.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="detali-tit">
+        <div class="tii-main">
+            <h1>购物车</h1>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" class="sy">
+                        <img src="../static/img/主页.png" alt="">
+                    </a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #CC2121;">&nbsp;/&nbsp;购物车</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content content-nav-base shopcart-content">
+        <div class="cart w1200">
+            <div class="cart-table-th">
+                <div class="th th-chk">
+                    <div class="select-all">
+                        <div class="cart-checkbox">
+                            <input class="check-all check" id="allCheckked" type="checkbox" value="true" />
+                        </div>
+                        <label>&nbsp;&nbsp;全选</label>
+                    </div>
+                </div>
+                <div class="th th-item">
+                    <div class="th-inner">
+                        商品
+                    </div>
+                </div>
+                <div class="th th-price">
+                    <div class="th-inner">
+                        单价
+                    </div>
+                </div>
+                <div class="th th-amount">
+                    <div class="th-inner">
+                        数量
+                    </div>
+                </div>
+                <div class="th th-sum">
+                    <div class="th-inner">
+                        小计
+                    </div>
+                </div>
+                <div class="th th-op">
+                    <div class="th-inner">
+                        操作
+                    </div>
+                </div>
+            </div>
+            <div class="OrderList">
+                <div class="order-content" id="list-cont">
+            <!-- 此处引入模板 -->
+                {{each shopCartData}}
+                    <ul class="item-content layui-clear" goodsId="{{$value.goodsId}}">
+                        <li class="th th-chk">
+                            <div class="select-all">
+                                <div class="cart-checkbox">
+                                    <input class="CheckBoxShop check" id="" type="checkbox" num="all" name="select-all"
+                                        value="true" />
+                                </div>
+                            </div>
+                        </li>
+                        <li class="th th-item">
+                            <div class="item-cont">
+                                <a href="javascript:;"><img src="../static/img/product/{{$value.goodsImgSrc}}" /></a>
+                                <div class="text">
+                                    <div class="title">{{$value.goodsName}}</div>
+                                    <p><span>{{$value.goodsSize}}</span></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="th th-price">
+                            <span class="th-su">{{$value.goodsPrice}}</span>
+                        </li>
+                        <li class="th th-amount">
+                            <div class="box-btn layui-clear">
+                                <div class="less layui-btn">-</div>
+                                <input class="Quantity-input" type="" name="" value="{{$value.goodsNum}}" disabled="disabled" />
+                                <div class="add layui-btn">+</div>
+                            </div>
+                        </li>
+                        <li class="th th-sum">
+                            <span class="sum">{{$value.totalPrice}}</span>
+                        </li>
+                        <li class="th th-op">
+                            <span class="dele-btn">删除</span>
+                        </li>
+                    </ul>
+                {{/each}}
+                </div>
+            </div>
+
+
+            <div class="FloatBarHolder layui-clear">
+                <div class="th th-chk">
+                    <div class="select-all">
+                        <label>&nbsp;&nbsp;已选<span class="Selected-pieces">0</span>件</label>
+                    </div>
+                </div>
+                <div class="th batch-deletion">
+                    <span class="batch-dele-btn">批量删除</span>
+                </div>
+                <div class="th Settlement">
+                    <button class="layui-btn">结算</button>
+                </div>
+                <div class="th total">
+                    <p>应付：<span class="pieces-total">0</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:" class="backTop">
+        <img src="../static/img/箭头 上.png" width="80%">
+    </a>
+    <script src="../static/js/axios.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            var check_all = document.querySelector("#allCheckked")
+            var ceks = document.querySelectorAll(".CheckBoxShop")
+            var check_all1 = document.querySelector(".FloatBarHolder .check-all")
+            var check_count = document.querySelector(".FloatBarHolder .Selected-pieces")
+            check_all.addEventListener("click", function () {
+                var count = 0
+                for (var i = 0; i < ceks.length; i++) {
+                    ceks[i].checked = check_all.checked
+
+                }
+                for (var k = 0; k < ceks.length; k++) {
+                    if (ceks[k].checked) {
+                        count++
+                    }
+                }
+                check_count.innerText = count
+                totalPrice()
+            })
+            for (var i = 0; i < ceks.length; i++) {
+                ceks[i].addEventListener("click", function () {
+                    var count = 0
+                    var bool = true
+                    for (var j = 0; j < ceks.length; j++) {
+                        if (ceks[j].checked != true) {
+                            bool = false;
+                            break;
+                        }
+
+                    }
+                    for (var k = 0; k < ceks.length; k++) {
+                        if (ceks[k].checked) {
+                            count++
+                        }
+                    }
+                    if (bool) {
+                        check_all.checked = bool
+                    } else {
+                        check_all.checked = bool
+                    }
+                    check_count.innerText = count
+                    totalPrice()
+                })
+            }
+
+            // 代理监听事件集合   在totalPrice()方法中添加axios请求，每当对购物车进行操作时都会向服务器发送请求，对数据库数据进行更新：
+            // 购物车更新的逻辑思路 
+            // 加减事件时 需要的参数  该商品的Id  更新后的数量 更新后的小计  
+            // 删除时 需要的参数 商品Id 
+            // 批量删除时 被选中的商品Id集合
+            // 通过axios发送参数到服务器端的接口，在接口中对数据进行更新，然后重定向回购物车界面
+
+            // 先定义接口地址：http://127.0.0.1:3000/admin/updateShopCart
+            var url = 'http://127.0.0.1:3000/admin/updateShopCart';
+            var urlDel = 'http://127.0.0.1:3000/admin/delShopCart'
+
+            document.body.addEventListener("click", function (e) {
+                var less = document.querySelectorAll(".less")
+                var add = document.querySelectorAll(".add")
+                if (e.target.innerText == "+") {
+                    // 加号按钮事件
+                    var num = Number(e.target.previousElementSibling.value) + 1
+                    e.target.previousElementSibling.value = num
+                    var price = Number(e.target.parentElement.parentElement.previousElementSibling.children[0].innerText)
+                    // var xiaoji = (num * price).toFixed(2);
+                    var xiaoji = (num * price);
+                    e.target.parentElement.parentElement.nextElementSibling.children[0].innerText = xiaoji;
+                    totalPrice()
+
+                    var goodsId = e.target.parentElement.parentElement.parentElement.getAttribute("goodsId");
+                    var params = {
+                        goodsNum:num,
+                        totalPrice:xiaoji,
+                        goodsId:goodsId 
+                    }
+
+                    axios({
+                        method:"post",
+                        url:url,
+                        data:params
+                    }).then((res)=>{
+                        // console.log("请求发送完成")
+                    })
+
+                } else if (e.target.innerText == "-") {
+                    // 减号按钮事件
+                    if (e.target.nextElementSibling.value > 1) {
+                        var num = Number(e.target.nextElementSibling.value) - 1
+                        e.target.nextElementSibling.value = num
+                        var price = Number(e.target.parentElement.parentElement.previousElementSibling.children[0].innerText)
+                        // var xiaoji = (num * price).toFixed(2);
+                        var xiaoji = (num * price);
+                        e.target.parentElement.parentElement.nextElementSibling.children[0].innerText = xiaoji;
+                        totalPrice()
+
+                        var goodsId = e.target.parentElement.parentElement.parentElement.getAttribute("goodsId");
+                        var params = {
+                            goodsNum:num,
+                            totalPrice:xiaoji,
+                            goodsId:goodsId 
+                        }
+
+                        axios({
+                            method:"post",
+                            url:url,
+                            data:params
+                        }).then((res)=>{
+                            // console.log("请求发送完成")
+                        })
+                    } else {
+                        alert("数量不能小于0")
+                    }
+
+                } else if (e.target.innerText == "删除") {
+                    // 删除按钮事件
+                    if (confirm("是否删除")) {
+                        e.target.parentElement.parentElement.remove()
+                        totalPrice()
+                        var goodsId = e.target.parentElement.parentElement.getAttribute("goodsId");
+                        var params = {
+                            goodsId:goodsId 
+                        }
+1
+                        axios({
+                            method:"post",
+                            url:urlDel,
+                            data:params
+                        }).then((res)=>{
+                            // console.log("请求发送完成")
+                        })
+                    }
+                } else if (e.target.innerText == "批量删除") {
+                    // 批量删除按钮事件
+                    if (confirm("是否删除")) {
+                        for (var i = ceks.length - 1; i >= 0; i--) {
+                            if (ceks[i].checked) {
+                                ceks[i].parentElement.parentElement.parentElement.parentElement.remove();
+                                var goodsId = ceks[i].parentElement.parentElement.parentElement.parentElement.getAttribute("goodsId");
+                                var params = {
+                                    goodsId:goodsId 
+                                }
+        1
+                                axios({
+                                    method:"post",
+                                    url:urlDel,
+                                    data:params
+                                }).then((res)=>{
+                                    // console.log("请求发送完成")
+                                })
+                                totalPrice()
+
+                            }
+                        }
+                        check_count.innerText = 0
+                        check_all1.checked = false
+                    }
+
+                }
+
+            })
+
+            function totalPrice() {
+                var total = 0
+                ceks = document.querySelectorAll(".CheckBoxShop")
+                for (var i = 0; i < ceks.length; i++) {
+                    if (ceks[i].checked) {
+                        total += parseInt(ceks[i].parentElement.parentElement.parentElement.parentElement.children[4].innerText)
+                    }
+                }
+
+                document.querySelector(".pieces-total").innerText = total + ".00"
+            }
+
+
+        })
+
+        var header = document.querySelector(".top-main");
+        var backTop = document.querySelector(".backTop")
+        window.addEventListener("scroll", function () {
+            var topScroll = document.body.scrollTop || document.documentElement.scrollTop;//滚动的距离,距离顶部的距离
+            var space = document.querySelector(".detali-tit");
+            var spaceOffsetHeight = space.offsetTop
+            console.log(spaceOffsetHeight, 'navOffsetHeight')
+            if (topScroll > spaceOffsetHeight) {
+                header.style.position = 'fixed';
+                header.style.top = '0';
+                header.style.zIndex = '9999';
+                header.style.backgroundColor = "white"
+                header.style.width = "100%"
+                backTop.style.display = "block"
+            } else {
+                header.style.position = 'static';
+                backTop.style.display = "none"
+            }
+        })
+
+        backTop.addEventListener("click", function () {
+            //toTop 滚动到顶部
+            var currentPosition, timer;
+            var speed = 10;
+            timer = setInterval(function () {
+                currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+                currentPosition -= speed; //speed变量
+                if (currentPosition > 0) {
+                    window.scrollTo(0, currentPosition);
+                } else {
+                    window.scrollTo(0, 0);
+                    clearInterval(timer);
+                }
+            }, 1);
+        })
+    </script>
+</body>
+
+</html>
