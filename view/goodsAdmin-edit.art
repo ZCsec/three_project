@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>FLower userAdmin-edit</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 网站标志 -->
+        <div class="logo fl">
+            <div class="logo fl">
+              花之语 <i>Flower Dream</i>
+            </div>
+        </div>
+        <!-- /网站标志 -->
+        <!-- 用户信息 -->
+        <div class="info">
+            <div class="profile dropdown fr">
+                <span class="btn dropdown-toggle" data-toggle="dropdown">
+                    admin
+                    <span class="caret"></span>
+                </span>
+                <ul class="dropdown-menu">
+                    <li><a href="user-edit.html">个人资料</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /用户信息 -->
+    </div>
+    <!-- /头部 -->
+    <!-- 主体内容 -->
+    <div class="content">
+        <!-- 侧边栏 -->
+        <div class="aside fl">
+            <ul class="menu list-unstyled">
+                <li>
+                    <a class="item active" href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
+						<span class="glyphicon glyphicon-user"></span>
+						用户管理
+					</a>
+                </li>
+                <li>
+                    <a class="item" href="http://127.0.0.1:3000/admin/getGoodsAll?userType={{userType}}&userId={{userId}}&page={{page}}">
+			  			<span class="glyphicon glyphicon-th-list"></span>
+			  			商品管理
+			  		</a>
+                </li>
+                <li>
+                    <a class="item" href="http://127.0.0.1:3000/admin/getOrdersAll?userType={{userType}}&userId={{userId}}">
+			  			<span class="glyphicon glyphicon-th-list"></span>
+			  			订单管理
+			  		</a>
+                </li>
+            </ul>
+            <div class="cprt">
+                
+                The language of flowers <a href="http://127.0.0.1:3000/static/index.html" target="_blank">花之语</a>
+            </div>
+        </div>
+        <!-- 侧边栏 -->
+        <div class="main">
+            <!-- 分类标题 -->
+            <div class="title">
+                <h4></h4>
+                <p class="tips"></p>
+            </div>
+            <!-- /分类标题 -->
+            
+               {{if type==1}}
+               <form  method="post" action="http://127.0.0.1:3000/admin/addGoods?userType={{userType}}&userId={{userId}}&page={{page}}" class="form-container">
+                <div class="form-group">
+                    <label>商品名称</label>
+                    <input type="text" name="goodsName" class="form-control" placeholder="请输入商品名">
+                </div>
+                <div class="form-group">
+                    <label>商品价格</label>
+                    <input type="text" name="goodsPrice" class="form-control" placeholder="请输入商品价格">
+                </div>
+                <div class="form-group">
+                    <label>商品图片路径</label>
+                    <input type="text" name="goodsImgSrc" class="form-control" placeholder="请输入商品图片路径">
+                </div>
+                <div class="form-group">
+                    <label>是否折扣</label>
+                    <select name="goodsDiscount" class="form-control">
+                        {{if goodsDiscount == 0}}
+                        <option value="0" checked>否</option>
+                        <option value="1">是</option>
+                        {{else}}
+                        <option value="0" >否</option>
+                        <option value="1" checked>是</option>
+                        {{/if}}
+                    </select>
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="新增" class="btn btn-primary">
+                </div>
+                </form>
+                {{ else }}
+                 <form method="post" action="http://127.0.0.1:3000/admin/updateGoods?goodsId={{goodsId}}&userType={{userType}}&userId={{userId}}&page={{page}}" class="form-container">
+                    <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" name="goodsName" class="form-control" value="{{goods.goodsName}}" placeholder="请输入商品名">
+                    </div>
+                    <div class="form-group">
+                        <label>商品单价</label>
+                        <input type="text" name="goodsPrice" value="{{goods.goodsPrice}}" class="form-control" placeholder="请输入价格">
+                    </div>
+                    <div class="form-group">
+                        <label>图片路径</label>
+                        <input type="text" name="goodsImgSrc" value="{{goods.goodsImgSrc}}" class="form-control" placeholder="请输入图片路径">
+                    </div>
+                    <div class="form-group">
+                        <label>是否折扣</label>
+                        <select name="goodsDiscount" class="form-control">
+                            {{if goodsDiscount == 0}}
+                            <option value="0" checked>否</option>
+                            <option value="1">是</option>
+                            {{else}}
+                            <option value="0" >否</option>
+                            <option value="1" checked>是</option>
+                            {{/if}}
+                        </select>
+                    </div>  
+
+
+                    <div class="buttons">
+                        <input type="submit" value="修改" class="btn btn-primary">
+                    </div>
+                </form>
+                {{/if}}
+            
+        </div>
+    </div>
+    <!-- /主体内容 -->
+    <script src="../static/lib/jquery/dist/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+        window.addEventListener("load",function(){
+            var aBtns = document.querySelectorAll('li .item');
+            
+            // 排他，先删再加
+            for(var i=0;i<aBtns.length;i++){
+                aBtns[i].removeAttribute("class","");
+                aBtns[i].setAttribute("class","item")
+                aBtns[1].setAttribute("class","item active")
+            }
+        })
+    </script>
+</body>
+
+</html>

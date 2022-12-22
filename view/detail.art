@@ -187,6 +187,7 @@
         </div>
         <div class="sp2">
             <h3 style="font-size: 24px;">{{$value.goodsName}}</h3>
+            <img class="animationHeart" src="../static/img/爱心.png" style="width:20px;position:absolute;bottom:0">
             <span class="price-regular" style="line-height: 30px;">${{$value.goodsPrice }} <del
                     style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
             <p style="color: red;"><b>抓紧时间！</b>打折倒计时：</p>
@@ -422,7 +423,7 @@
     // 商品详情页的购物车模块 
     // 获取元素
     var getNum = document.querySelector('.pro-qty');
-    console.log(getNum);
+    // console.log(getNum);
     getNum.addEventListener('click',function(e){
         if(e.target.innerText == "+"){
             e.target.previousElementSibling.value = Number(e.target.previousElementSibling.value) + 1;
@@ -434,58 +435,6 @@
     })
 </script>
 <script src="../static/js/axios.js"></script>
-<script>
-    // 先获取加入购物车按钮
-    var cartBtn = document.querySelector(".btn-cart2")
-    cartBtn.addEventListener("click",function(e){
-        // 商品名字
-        var goodsName = document.querySelector(".sp2 h3").innerText;
-        // 商品数量
-        var goodsNum = document.querySelector(".goodsNum").value
-        // 商品价格
-        var goodsPrice = document.querySelector(".price-regular").innerText
-        goodsPrice = goodsPrice.substring(1,3);
-        // 商品总价
-        var totalPrice = goodsNum * goodsPrice;
-        // 商品尺寸
-        var select = document.querySelector(".nice-select");
-        var index = select.selectedIndex;
-        var goodsSize = select.options[index].text 
-        
-        // 用户id
-        var userId = window.location.search;
-        userId = userId.substring(userId.indexOf("userId="),userId.lengths)
-        userId = userId.substring(userId.indexOf("=")+1,userId.lengths)
-        // 商品id
-        var goodsId = window.location.search;
-        goodsId = goodsId.substring(goodsId.indexOf("goodsId="),goodsId.indexOf("&userType"))
-        goodsId = goodsId.substring(goodsId.indexOf("=")+1,goodsId.lengths)
+<script src="../static/js/ShopAnimation.js"></script>
 
-        var params={
-            goodsName:goodsName,
-            goodsId:goodsId,
-            userId:userId,
-            goodsNum:goodsNum,
-            goodsPrice:goodsPrice,
-            totalPrice:totalPrice,
-            goodsSize:goodsSize
-        }
-
-        // 接口地址 购物车表 goodsId userId goodsNum goodsPrice totalPrice
-        var url = 'http://127.0.0.1:3000/admin/shopCartMsg'
-
-        // 当点击按钮时向接口发送ajax请求
-        axios({
-            method:"post",
-            url:url,
-            data:params
-        }).then((res)=>{
-            if(res.data == "添加成功"){
-                alert("添加成功")
-            }
-        })
-
-
-    })
-</script>
 </html>

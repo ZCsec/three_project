@@ -8,7 +8,7 @@ login.post('/login',(req,res)=>{
     db.query(sql,(err,results)=>{
         if(err) return res.send(err.message);
         for(var i=0;i<results.length;i++){
-            if(results[i].userName == req.body.name && results[i].userPwd == req.body.password && results[i].userType == 1){
+            if(results[i].userName == req.body.name && results[i].userPwd == req.body.password){
                 // 账号密码全对的情况 但是是普通用户
                 bool = false;
                 var url = 'http://127.0.0.1:3000/admin/loginType'+'?userType=' + results[i].userType + '&userId=' + results[i].userId;
@@ -23,7 +23,7 @@ login.post('/login',(req,res)=>{
 })
 
 
-login.get('/loginType',(req,res)=>{
+login.get('/loginType',async(req,res)=>{
     if(req.query.userType == 1){
         // 普通用户 直接给模板套数据
         var sql = 'select * from goods';
@@ -32,9 +32,33 @@ login.get('/loginType',(req,res)=>{
             if(err) return res.send(err.message);
             res.render("index",{goods:results,userId:req.query.userId,userType:req.query.userType})
         })
-
+    }else if(req.query.userType == 0){
+        // 超级管理员登录
+        // 获取当前页数
+        var page = req.query.page || 1;
+        // 每页显示数量
+        var pageSize = 10;
+        // 总条数
+        var count = await p;
+        // 总页数
+        var total = Math.ceil(count/pageSize);
+        var sql = 'select * from user limit ?,?';
+        db.query(sql,[(page-1)*pageSize,pageSize],(err,results)=>{
+            if(err) return console.log(err.message);
+            res.render("userAdmin",{usersData:results,userId:req.query.userId,userType:req.query.userType,page:page,total:total})
+        })
     }
 })
+
+// 数据总数
+var p = new Promise((resolve,reject)=>{
+    var sql = "select count(*) as count from user"
+    db.query(sql,(err,results)=>{
+        if(err) return console.log(err.message);
+        resolve(results[0].count)
+    })
+})
+
 
 login.get('/goodsDetail',(req,res)=>{
     // 获取商品id  用户类型
@@ -58,8 +82,9 @@ login.post('/shopCartMsg',(req,res)=>{
     var goodsName = req.body.goodsName;
     var goodsNum = req.body.goodsNum;
     var goodsId = req.body.goodsId;
-    var sql1 = 'SELECT * FROM shopcart JOIN goods ON shopcart.`goodsId` = goods.`goodsId` WHERE goodsName = ?'
-    db.query(sql1,[goodsName],(err,results)=>{
+    var goodsSize = req.body.goodsSize;
+    var sql1 = 'SELECT * FROM shopcart JOIN goods ON shopcart.`goodsId` = goods.`goodsId` WHERE goodsName = ? and goodsSize = ?'
+    db.query(sql1,[goodsName,goodsSize],(err,results)=>{
         if(err) return console.log(err.message);
         // console.log(results);
         if(results.length == 0){
@@ -77,11 +102,12 @@ login.post('/shopCartMsg',(req,res)=>{
             // results[0].goodsNum 该商品在数据库中存在的数量
             var newNum = parseInt(results[0].goodsNum)+parseInt(goodsNum);
             var goodsPrice = req.body.goodsPrice;
+            var goodsSize = req.body.goodsSize;
             var totalPrice = newNum * goodsPrice;
             // console.log(totalPrice);
             // 获取新的商品数量  原有数量+本次新增数量
-            var sql2 = 'UPDATE shopcart SET goodsNum= ?,totalPrice=? WHERE goodsId = ?'
-            db.query(sql2,[newNum,totalPrice,goodsId],(err,results)=>{
+            var sql2 = 'UPDATE shopcart SET goodsNum= ?,totalPrice=? WHERE goodsId = ? and goodsSize = ?'
+            db.query(sql2,[newNum,totalPrice,goodsId,goodsSize],(err,results)=>{
                 if(err) return console.log(err.message);
                 if(results.affectedRows == 1){
                     res.send("添加成功")
@@ -113,8 +139,8 @@ login.get('/getShopCart',(req,res)=>{
 // 购物车内操作更新接口
 login.post('/updateShopCart',(req,res)=>{
     // console.log(req.body);  
-    var sql = 'UPDATE shopcart SET goodsNum = ?,totalPrice=? WHERE goodsId = ?'
-    db.query(sql,[req.body.goodsNum,req.body.totalPrice,req.body.goodsId],(err,results)=>{
+    var sql = 'UPDATE shopcart SET goodsNum = ?,totalPrice=? WHERE cartId = ?'
+    db.query(sql,[req.body.goodsNum,req.body.totalPrice,req.body.cartId],(err,results)=>{
         if(err) return console.log(err.message);
         if(results.affectedRows == 1){
             res.send("修改成功")
@@ -126,8 +152,8 @@ login.post('/updateShopCart',(req,res)=>{
 // 购物车删除操作接口
 login.post('/delShopCart',(req,res)=>{
     // console.log(req.body);
-    var sql = 'DELETE FROM shopcart WHERE goodsId = ?';
-    db.query(sql,[req.body.goodsId],(err,results)=>{
+    var sql = 'DELETE FROM shopcart WHERE cartId = ?';
+    db.query(sql,[req.body.cartId],(err,results)=>{
         if(err) return console.log(err.message);
         if(results.affectedRows == 1){
             res.send("删除成功")

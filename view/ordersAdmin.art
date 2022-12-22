@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>FLower userAdmin</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+</head>
+
+<body>
+	<!-- 头部 -->
+    <div class="header">
+    	<!-- 网站标志 -->
+        <div class="logo fl">
+          花之语 <i>Flower Dream</i>
+        </div>
+        <!-- /网站标志 -->
+        <!-- 用户信息 -->
+        <div class="info">
+            <div class="profile dropdown fr">
+                <span class="btn dropdown-toggle" data-toggle="dropdown">
+					admin
+					<span class="caret"></span>
+                </span>
+                <ul class="dropdown-menu">
+                    <li><a href="user-edit.html">个人资料</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /用户信息 -->
+    </div>
+    <!-- /头部 -->
+    <!-- 主体内容 -->
+    <div class="content">
+    	<!-- 侧边栏 -->
+        <div class="aside fl">
+            <ul class="menu list-unstyled">
+                <li>
+                    <a class="item active" href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
+						<span class="glyphicon glyphicon-user"></span>
+						用户管理
+					</a>
+                </li>
+                <li>
+                    <a class="item" href="http://127.0.0.1:3000/admin/getGoodsAll?userType={{userType}}&userId={{userId}}">
+			  			<span class="glyphicon glyphicon-th-list"></span>
+			  			商品管理
+			  		</a>
+                </li>
+                <li>
+                    <a class="item" href="http://127.0.0.1:3000/admin/getOrdersAll?userType={{userType}}&userId={{userId}}">
+			  			<span class="glyphicon glyphicon-th-list"></span>
+			  			订单管理
+			  		</a>
+                </li>
+            </ul>
+            <div class="cprt">
+                The language of flowers <a href="http://127.0.0.1:3000/static/index.html" target="_blank">花之语</a>
+            </div>
+        </div>
+        <!-- 侧边栏 -->
+        <div class="main">
+        	<!-- 分类标题 -->
+            <div class="title">
+                <h4>用户</h4>
+                <span class="title">找到{{ordersData.length}}个订单</span>
+                <a href="http://127.0.0.1:3000/admin/getOrderType?type=1&userType={{userType}}&userId={{userId}}&page={{page}}" class="btn btn-primary new">新增订单</a>
+            </div>
+            <!-- /分类标题 -->
+            <!-- 内容列表 -->
+            <table class="table table-striped table-bordered table-hover custom-table">
+                <thead>
+                    <tr>
+                        <th>订单Id</th>
+                        <th>商品信息</th>
+                        <th>订单金额</th>
+                        <th>用户Id</th>
+                        <th>配送地址</th>
+                        <th>订单状态</th>
+                        <th>订单时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{each ordersData}}
+                <tr>
+                    <td>{{$value.orderId}}</td>
+                    <td>{{$value.goodsAll}}</td>
+                    <td>{{$value.orderPrice}}</td>
+                    <td>{{$value.userId}}</td>
+                    <td>{{$value.userAddress}}</td>
+                    <td>{{$value.orderState}}</td>
+                    <td>{{$value.orderTime}}</td>
+                    <td>
+                        <a href="http://127.0.0.1:3000/admin/getOrderType?type=2&userType={{userType}}&userId={{userId}}&nowOrderId={{$value.orderId}}&page={{page}}"  class="glyphicon glyphicon-edit"></a>
+                        <i class="glyphicon glyphicon-remove" userType={{userType}} userId={{userId}} data-page="{{page}}" data-orderId="{{$value.orderId}}"  data-toggle="modal" data-target=".confirm-modal"></i>
+                    </td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+            <!-- /内容列表 -->
+            <!-- 分页 -->
+            <ul class="pagination">
+                <li style="display:{{page>1?"inline":"none"}}">
+                    <a href="http://127.0.0.1:3000/admin/getOrdersAll?userType={{userType}}&userId={{userId}}&page={{page-0-1}}">
+			        <span>&laquo;</span>
+			      </a>
+                </li>
+
+                    <% for(var i=1;i<=total;i++){ %>
+                    <li><a href="http://127.0.0.1:3000/admin/getOrdersAll?userType={{userType}}&userId={{userId}}&page=<%=i%>"><%=i%></a></li>
+                    <% } %> 
+                <li style="display:{{page==total?"none":"inline"}}">
+                    <a href="http://127.0.0.1:3000/admin/getOrdersAll?userType={{userType}}&userId={{userId}}&page={{page-0+1}}">
+			        <span>&raquo;</span>
+			      </a>
+                </li>
+            </ul>
+            <!-- /分页 -->
+        </div>
+    </div>
+    <!-- /主体内容 -->
+    <!-- 删除确认弹出框 -->
+    <div class="modal fade confirm-modal" id="delModal">
+        <div class="modal-dialog modal-lg">
+            <form class="modal-content" id="delForm"  method="post" action="http://127.0.0.1:3000/admin/delOrder?nowOrderId=">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">请确认</h4>
+                </div>
+                <div class="modal-body">
+                    <p>您确定要删除这个用户吗?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <input type="submit" class="btn btn-primary delUserBtn">
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /删除确认弹出框 -->
+    <script src="../static/lib/jquery/dist/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/js/template-web.js"></script>
+    <script src="../static/js/axios.js"></script>
+
+    <script>
+        window.addEventListener("load",function(){
+            var aBtns = document.querySelectorAll('li .item');
+            
+            // 排他，先删再加
+            for(var i=0;i<aBtns.length;i++){
+                aBtns[i].removeAttribute("class","");
+                aBtns[i].setAttribute("class","item")
+                aBtns[2].setAttribute("class","item active")
+            }
+        })
+    </script>
+
+    <script>
+        // 给弹出框添加显示事件
+        $('#delModal').on('show.bs.modal',function(ev){
+            var nowOrderId = $(ev.relatedTarget).attr('data-orderId');
+            var nowUserType = $(ev.relatedTarget).attr('data-userType');
+            var userType = $(ev.relatedTarget).attr('userType');
+            var userId = $(ev.relatedTarget).attr('userId');
+            var page = $(ev.relatedTarget).attr('data-page');
+            var delUserBtn = document.querySelector('.delUserBtn');
+            //var href = $('#delForm').prop('action');
+            var href = 'http://127.0.0.1:3000/admin/delOrder?nowOrderId=';
+            
+            // 当点击按钮确认删除时，才会拼接链接
+            delUserBtn.addEventListener('click',function(){
+                // var action = href + stuNo + '&page=' + page;
+                var action = href + nowOrderId  + '&userId=' + userId + '&userType=' + userType + '&page=' + page;
+                console.log(action)
+                // 将form表单的action属性拼接并设置好
+                $('#delForm').attr('action',action)
+            })
+        })
+    </script>
+
+</body>
+
+</html>

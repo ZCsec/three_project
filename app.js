@@ -25,8 +25,16 @@ app.use('/static',express.static(path.join(__dirname,'public')))
 // 导入路由
 const login = require('./router/login')
 const register = require('./router/register')
+const userAdmin = require('./router/userAdmin')
+const goodsAdmin = require('./router/goodsAdmin')
+const shopCart = require('./router/shopCart')
+const ordersAdmin = require('./router/ordersAdmin')
 app.use('/admin',login)
 app.use('/admin',register)
+app.use('/admin',userAdmin)
+app.use('/admin',goodsAdmin)
+app.use('/admin',shopCart)
+app.use('/admin',ordersAdmin)
 
 app.listen('3000',function(){
     console.log('running at http://127.0.0.1:3000')

@@ -194,7 +194,7 @@
                 <div class="order-content" id="list-cont">
             <!-- 此处引入模板 -->
                 {{each shopCartData}}
-                    <ul class="item-content layui-clear" goodsId="{{$value.goodsId}}">
+                    <ul class="item-content layui-clear" userId={{userId}}  userType={{userType}}  goodsId={{$value.goodsId}} cartId="{{$value.cartId}}">
                         <li class="th th-chk">
                             <div class="select-all">
                                 <div class="cart-checkbox">
@@ -208,7 +208,7 @@
                                 <a href="javascript:;"><img src="../static/img/product/{{$value.goodsImgSrc}}" /></a>
                                 <div class="text">
                                     <div class="title">{{$value.goodsName}}</div>
-                                    <p><span>{{$value.goodsSize}}</span></p>
+                                    <p><span class="goodsSize" >{{$value.goodsSize}}</span></p>
                                 </div>
                             </div>
                         </li>
@@ -244,7 +244,7 @@
                     <span class="batch-dele-btn">批量删除</span>
                 </div>
                 <div class="th Settlement">
-                    <button class="layui-btn">结算</button>
+                    <button class="layui-btn pay">结算</button>
                 </div>
                 <div class="th total">
                     <p>应付：<span class="pieces-total">0</span></p>
@@ -313,7 +313,8 @@
             // 先定义接口地址：http://127.0.0.1:3000/admin/updateShopCart
             var url = 'http://127.0.0.1:3000/admin/updateShopCart';
             var urlDel = 'http://127.0.0.1:3000/admin/delShopCart'
-
+            
+            // 购物车操作兼更新数据库
             document.body.addEventListener("click", function (e) {
                 var less = document.querySelectorAll(".less")
                 var add = document.querySelectorAll(".add")
@@ -327,11 +328,11 @@
                     e.target.parentElement.parentElement.nextElementSibling.children[0].innerText = xiaoji;
                     totalPrice()
 
-                    var goodsId = e.target.parentElement.parentElement.parentElement.getAttribute("goodsId");
+                    var cartId = e.target.parentElement.parentElement.parentElement.getAttribute("cartId");
                     var params = {
                         goodsNum:num,
                         totalPrice:xiaoji,
-                        goodsId:goodsId 
+                        cartId:cartId 
                     }
 
                     axios({
@@ -353,11 +354,11 @@
                         e.target.parentElement.parentElement.nextElementSibling.children[0].innerText = xiaoji;
                         totalPrice()
 
-                        var goodsId = e.target.parentElement.parentElement.parentElement.getAttribute("goodsId");
+                        var cartId = e.target.parentElement.parentElement.parentElement.getAttribute("cartId");
                         var params = {
                             goodsNum:num,
                             totalPrice:xiaoji,
-                            goodsId:goodsId 
+                            cartId:cartId 
                         }
 
                         axios({
@@ -376,11 +377,11 @@
                     if (confirm("是否删除")) {
                         e.target.parentElement.parentElement.remove()
                         totalPrice()
-                        var goodsId = e.target.parentElement.parentElement.getAttribute("goodsId");
+                        var cartId = e.target.parentElement.parentElement.getAttribute("cartId");
                         var params = {
-                            goodsId:goodsId 
+                            cartId:cartId, 
                         }
-1
+
                         axios({
                             method:"post",
                             url:urlDel,
@@ -395,11 +396,10 @@
                         for (var i = ceks.length - 1; i >= 0; i--) {
                             if (ceks[i].checked) {
                                 ceks[i].parentElement.parentElement.parentElement.parentElement.remove();
-                                var goodsId = ceks[i].parentElement.parentElement.parentElement.parentElement.getAttribute("goodsId");
+                                var cartId = ceks[i].parentElement.parentElement.parentElement.parentElement.getAttribute("cartId");
                                 var params = {
-                                    goodsId:goodsId 
+                                    cartId:cartId
                                 }
-        1
                                 axios({
                                     method:"post",
                                     url:urlDel,
@@ -428,12 +428,14 @@
                     }
                 }
 
-                document.querySelector(".pieces-total").innerText = total + ".00"
+                document.querySelector(".pieces-total").innerText = total
             }
 
-
         })
+    </script>
 
+    <script type="text/javascript">
+        // 悬浮窗滚动
         var header = document.querySelector(".top-main");
         var backTop = document.querySelector(".backTop")
         window.addEventListener("scroll", function () {
@@ -468,6 +470,108 @@
                     clearInterval(timer);
                 }
             }, 1);
+        })
+    </script>
+
+    <script type="text/javascript">
+        // 点击结算按钮 发送结算请求
+        // 获取结算按钮
+        var payBtn =  document.querySelector(".pay");
+        // 定义接口地址
+        var url = 'http://127.0.0.1:3000/admin/getPay'
+        // 获取当前购物车的用户Id
+        var userId = document.querySelector('.item-content').getAttribute('userId');
+        var userType = document.querySelector('.item-content').getAttribute('userType');
+
+
+
+
+
+        payBtn.addEventListener("click",function(){
+            // 商品总价
+            var orderPrice = document.querySelector('.pieces-total').innerText;
+            // 获取被选中的商品结算项
+            var checks = document.querySelectorAll('.CheckBoxShop');
+            var boolC = false;
+            var goodsAll = [];
+            for(var i=0;i<checks.length;i++){
+                if(checks[i].checked){
+                    let goodsName = checks[i].parentElement.parentElement.parentElement.parentElement.querySelector('.title').innerText;
+                    let goodsSize = checks[i].parentElement.parentElement.parentElement.parentElement.querySelector('.goodsSize').innerText;
+                    let goodsNum = checks[i].parentElement.parentElement.parentElement.parentElement.querySelector('.Quantity-input').value;
+                    let cartId = checks[i].parentElement.parentElement.parentElement.parentElement.getAttribute('cartid');
+                    
+                    let goodsMsg = {
+                        goodsName,goodsSize,goodsNum,cartId
+                    }
+                    goodsAll.push(goodsMsg);
+                    boolC = true;
+                }
+            }
+
+            // 获取当前时间 
+            function times(){//时间的方法函数
+				//创建一个当前日期对象
+				var d=new Date();
+				var y=d.getFullYear(); //年
+				var m=d.getMonth()+1;  //月
+				var dd=d.getDate();  //日
+				var hh=d.getHours();  //时
+				var min=d.getMinutes();  //分
+				var ss=d.getSeconds();  //秒
+				var s=y+'-'+m+'-'+dd+' '+hh+':'+min+':'+ss;
+				return s;
+			}
+
+            var time = times();
+
+            // 需要有以下数据 1.当前购物车的商品集合(goodsAll) 2.总计金额(orderPrice) 3.用户id(userId)  4.用户地址(userAddress:默认值)  5.orderStates(待设置默认值)  6.订单时间(orderTime)
+            var params = {
+                goodsAll:goodsAll,
+                orderPrice:orderPrice,
+                userId:userId,
+                userType:userType,
+                orderTime:time
+            }
+
+            axios({
+                method:"post",
+                url:url,
+                data:params
+            }).then((res)=>{
+                // console.log(res.data)
+                // 结算的同时要将之前的选中的几件商品在购物车中删除  goodsAll列表中的cartId  通过删除接口删除
+                if(res.data == "结算成功"){
+                    alert("结算成功")
+                    
+                    // 创建一个需要结算的购物车id表(cartId)
+                    var cartIds = [];
+                    for(var i=0;i<params.goodsAll.length;i++){
+                        let cartId = params.goodsAll[i].cartId;
+                        cartIds.push(cartId)
+                    }
+
+                    // 将列表中的数据删除
+                    for(var i=0;i<cartIds.length;i++){
+                        var params1 = {
+                            cartId:cartIds[i]
+                        }
+                        // 接口地址
+                        var url = 'http://127.0.0.1:3000/admin/delShopCart'
+
+                        axios({
+                            method:"post",
+                            url:url,
+                            data:params1
+                        }).then((res)=>{
+                            if(res.data == "删除成功"){
+                                // console.log("请求发送完成")
+                                location.reload()
+                            }
+                        })
+                    }
+                }
+            })
         })
     </script>
 </body>

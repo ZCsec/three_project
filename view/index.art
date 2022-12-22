@@ -246,7 +246,7 @@
                         <span>情人节礼物</span>
                         <h1>Fresh Your Mind</h1>
                         <h2>&amp; Feeling love</h2>
-                        <a href="../static/goodslist.html" class="btn-hero" tabindex="-1">立即下单</a>
+                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}" class="btn-hero" tabindex="-1">立即下单</a>
                     </div>
                 </div>
                 <div class="swiper-slide">
@@ -255,7 +255,7 @@
                         <span>情人节礼物</span>
                         <h1>Fresh Your Mind</h1>
                         <h2>&amp; Feeling love</h2>
-                        <a href="../static/goodslist.html" class="btn-hero" tabindex="-1">立即下单</a>
+                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}" class="btn-hero" tabindex="-1">立即下单</a>
                     </div>
                 </div>
             </div>

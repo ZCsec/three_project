@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>FLower userAdmin-edit</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 网站标志 -->
+        <div class="logo fl">
+            <div class="logo fl">
+              花之语 <i>Flower Dream</i>
+            </div>
+        </div>
+        <!-- /网站标志 -->
+        <!-- 用户信息 -->
+        <div class="info">
+            <div class="profile dropdown fr">
+                <span class="btn dropdown-toggle" data-toggle="dropdown">
+                    admin
+                    <span class="caret"></span>
+                </span>
+                <ul class="dropdown-menu">
+                    <li><a href="user-edit.html">个人资料</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /用户信息 -->
+    </div>
+    <!-- /头部 -->
+    <!-- 主体内容 -->
+    <div class="content">
+        <!-- 侧边栏 -->
+        <div class="aside fl">
+            <ul class="menu list-unstyled">
+                <li>
+                    <a class="item active" href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
+						<span class="glyphicon glyphicon-user"></span>
+						用户管理
+					</a>
+                </li>
+                <li>
+                    <a class="item" href="http://127.0.0.1:3000/admin/getGoodsAll?userType={{userType}}&userId={{userId}}&page={{page}}">
+			  			<span class="glyphicon glyphicon-th-list"></span>
+			  			商品管理
+			  		</a>
+                </li>
+                <li>
+                    <a class="item" href="http://127.0.0.1:3000/admin/getOrdersAll?userType={{userType}}&userId={{userId}}">
+			  			<span class="glyphicon glyphicon-th-list"></span>
+			  			订单管理
+			  		</a>
+                </li>
+            </ul>
+            <div class="cprt">
+                
+                The language of flowers <a href="http://127.0.0.1:3000/static/index.html" target="_blank">花之语</a>
+            </div>
+        </div>
+        <!-- 侧边栏 -->
+        <div class="main">
+            <!-- 分类标题 -->
+            <div class="title">
+                <h4></h4>
+                <p class="tips"></p>
+            </div>
+            <!-- /分类标题 -->
+            
+               {{if type==1}}
+               <form  method="post" action="http://127.0.0.1:3000/admin/addOrder?userType={{userType}}&userId={{userId}}&page={{page}}" class="form-container">
+                <div class="form-group">
+                    <label>商品信息(Json字符串格式)</label>
+                    <input type="text" name="goodsAll" class="form-control" placeholder="请输入商品信息">
+                </div>
+                <div class="form-group">
+                    <label>订单金额</label>
+                    <input type="text" name="orderPrice" class="form-control" placeholder="请输入订单金额">
+                </div>
+                <div class="form-group">
+                    <label>订单用户Id</label>
+                    <input type="text" name="userId" class="form-control" placeholder="请输入订单用户Id">
+                </div>
+                <div class="form-group">
+                    <label>订单地址</label>
+                    <input type="text" name="userAddress" class="form-control" placeholder="请输入订单地址">
+                </div>
+                <div class="form-group">
+                    <label>订单状态</label>
+                    <input type="text" name="orderState" class="form-control" placeholder="请输入订单状态">
+                </div>
+                <div class="form-group">
+                    <label>订单时间</label>
+                    <input type="text" name="orderTime" class="form-control" placeholder="请输入订单时间">
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="新增" class="btn btn-primary">
+                </div>
+                </form>
+                {{ else }}
+                 <form method="post" action="http://127.0.0.1:3000/admin/updateOrder?orderId={{orders.orderId}}&userType={{userType}}&userId={{userId}}&page={{page}}" class="form-container">
+                    <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" name="goodsAll" class="form-control" value="{{orders.goodsAll}}" placeholder="请输入商品信息">
+                    </div>
+                    <div class="form-group">
+                        <label>订单金额</label>
+                        <input type="text" name="orderPrice" value="{{orders.orderPrice}}" class="form-control" placeholder="请输入订单金额">
+                    </div>
+                    <div class="form-group">
+                        <label>用户Id</label>
+                        <input type="text" name="userId" value="{{orders.userId}}" class="form-control" placeholder="请输入用户Id">
+                    </div>
+                    <div class="form-group">
+                        <label>订单地址</label>
+                        <input type="text" name="userAddress" value="{{orders.userAddress}}" class="form-control" placeholder="请输入订单地址">
+                    </div>
+                    <div class="form-group">
+                        <label>订单状态</label>
+                        <input type="text" name="orderState" value="{{orders.orderState}}" class="form-control" placeholder="请输入订单状态">
+                    </div>
+                    <div class="form-group">
+                        <label>订单时间(YYYY-MM-DD HH:mm:ss)</label>
+                        <input type="text" name="orderTime" value="{{orders.orderTime}}" class="form-control" placeholder="请输入订单时间">
+                    </div>
+                    <div class="buttons">
+                        <input type="submit" value="修改" class="btn btn-primary">
+                    </div>
+                </form>
+                {{/if}}
+            
+        </div>
+    </div>
+    <!-- /主体内容 -->
+    <script src="../static/lib/jquery/dist/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script>
+        window.addEventListener("load",function(){
+            var aBtns = document.querySelectorAll('li .item');
+            
+            // 排他，先删再加
+            for(var i=0;i<aBtns.length;i++){
+                aBtns[i].removeAttribute("class","");
+                aBtns[i].setAttribute("class","item")
+                aBtns[2].setAttribute("class","item active")
+            }
+        })
+    </script>
+</body>
+
+</html>

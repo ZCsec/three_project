@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>FLower userAdmin-edit</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/base.css">
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 网站标志 -->
+        <div class="logo fl">
+            <div class="logo fl">
+              花之语 <i>Flower Dream</i>
+            </div>
+        </div>
+        <!-- /网站标志 -->
+        <!-- 用户信息 -->
+        <div class="info">
+            <div class="profile dropdown fr">
+                <span class="btn dropdown-toggle" data-toggle="dropdown">
+                    admin
+                    <span class="caret"></span>
+                </span>
+                <ul class="dropdown-menu">
+                    <li><a href="user-edit.html">个人资料</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /用户信息 -->
+    </div>
+    <!-- /头部 -->
+    <!-- 主体内容 -->
+    <div class="content">
+        <!-- 侧边栏 -->
+        <div class="aside fl">
+            <ul class="menu list-unstyled">
+                <li>
+                    <a class="item active" href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
+						<span class="glyphicon glyphicon-user"></span>
+						用户管理
+					</a>
+                </li>
+                <li>
+                    <a class="item" href="http://127.0.0.1:3000/admin/getGoodsAll?userType={{userType}}&userId={{userId}}">
+			  			<span class="glyphicon glyphicon-th-list"></span>
+			  			商品管理
+			  		</a>
+                </li>
+                <li>
+                    <a class="item" href="http://127.0.0.1:3000/admin/getOrdersAll?userType={{userType}}&userId={{userId}}">
+			  			<span class="glyphicon glyphicon-th-list"></span>
+			  			订单管理
+			  		</a>
+                </li>
+            </ul>
+            <div class="cprt">
+                
+                The language of flowers <a href="http://127.0.0.1:3000/static/index.html" target="_blank">花之语</a>
+            </div>
+        </div>
+        <!-- 侧边栏 -->
+        <div class="main">
+            <!-- 分类标题 -->
+            <div class="title">
+                <h4></h4>
+                <p class="tips"></p>
+            </div>
+            <!-- /分类标题 -->
+            
+               {{if type==1}}
+               <form  method="post" action="http://127.0.0.1:3000/admin/adduser?userType={{userType}}&userId={{userId}}&page={{page}}" class="form-container">
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" name="userName" class="form-control" placeholder="请输入用户名">
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input type="password" name="userPwd" class="form-control" placeholder="请输入用户密码">
+                </div>
+                <div class="form-group">
+                    <label>性别</label>
+                    <select name="userSex" class="form-control">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>  
+                <div class="form-group">
+                    <label>用户类型</label>
+                    <select name="userType" class="form-control">
+                        <option value="1">普通用户</option>
+                        <option value="0">管理员</option>
+                    </select>
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="新增" class="btn btn-primary">
+                </div>
+                </form>
+                {{ else }}
+                 <form method="post" action="http://127.0.0.1:3000/admin/updateUser?nowUserId={{nowUserId}}&userType={{userType}}&userId={{userId}}&page={{page}}" class="form-container">
+                    <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" name="userName" class="form-control" value="{{user.userName}}" placeholder="请输入学生姓名">
+                    </div>
+                    <div class="form-group">
+                        <label>密码</label>
+                        <input type="password" name="userPwd" value="{{user.userPwd}}" class="form-control" placeholder="请输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label>性别</label>
+                        <select name="userSex" class="form-control">
+                            {{if user.userSex =="男"}}
+                            <option value="男" checked>男</option>
+                            <option value="女">女</option>
+                            {{else}}
+                            <option value="男" >男</option>
+                            <option value="女" checked>女</option>
+                            {{/if}}
+                        </select>
+                    </div>  
+
+
+                    <div class="buttons">
+                        <input type="submit" value="修改" class="btn btn-primary">
+                    </div>
+                </form>
+                {{/if}}
+            
+        </div>
+    </div>
+    <!-- /主体内容 -->
+    <script src="../static/lib/jquery/dist/jquery.min.js"></script>
+    <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
