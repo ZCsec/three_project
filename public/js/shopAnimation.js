@@ -69,7 +69,7 @@
                 //     heart.style.display = "none";
                 //     location.reload();
                 // });
-                alert("添加成功")
+                layer.msg('添加成功'); 
             }
         })
 

@@ -151,15 +151,20 @@ login.post('/updateShopCart',(req,res)=>{
 
 // 购物车删除操作接口
 login.post('/delShopCart',(req,res)=>{
-    // console.log(req.body);
-    var sql = 'DELETE FROM shopcart WHERE cartId = ?';
-    db.query(sql,[req.body.cartId],(err,results)=>{
-        if(err) return console.log(err.message);
-        if(results.affectedRows == 1){
-            res.send("删除成功")
-        }
-    })
+    var cartIds = req.body.cartId;
+    for(let i=0;i<cartIds.length;i++){
+        var sql = 'DELETE FROM shopcart WHERE cartId = ?';
+        db.query(sql,[cartIds[i]],(err,results)=>{
+            if(err) return console.log(err.message);
+            if(results.affectedRows == 1){
+                if(i==0){
+                    res.send("删除成功")
+                }
+            }
+        })
+    }
 })
+
 
 // 跳转进花店的接口
 login.get('/goodList',async(req,res)=>{

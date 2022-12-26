@@ -1607,6 +1607,19 @@ i {
   float: right;
 }
 
+.shopcart-content .FloatBarHolder .Settlement a.layui-btn {
+  width: 160px;
+  height: 84px;
+  line-height: 84px;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  background: pink;
+  border-radius: 0;
+  position: absolute;
+  right: 0px;
+  top: -1px;
+}
 .shopcart-content .FloatBarHolder .Settlement button.layui-btn {
   width: 160px;
   height: 84px;

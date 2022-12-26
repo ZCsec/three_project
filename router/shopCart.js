@@ -10,9 +10,14 @@ shopCart.post('/getPay',(req,res)=>{
     db.query(sql,[goodsAll,req.body.orderPrice,req.body.userId,req.body.orderTime],(err,results)=>{
         if(err) return console.log(err.message);
         if(results.affectedRows == 1){
-            res.send("结算成功")
+            var orderId = results.insertId;
+            // console.log(typeof(orderId));
+            res.send(orderId.toString())
+            // console.log(results);
         }
     })
 })
+
+
 
 module.exports = shopCart;

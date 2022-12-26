@@ -211,7 +211,7 @@
             <div class="top-main-right">
                 <!-- 搜索、个人、喜欢、购物车 -->
                 <ul>
-                    <li>
+                    <li style="display:none">
                         <a href="#">
                             <i class="sous">
                                 <img src="../static/img/搜索.png" alt="" width="60%">

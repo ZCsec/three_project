@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Pay</title>
+    <link rel="stylesheet" type="text/css" href="css/pay.css" />
+    <link rel="stylesheet" type="text/css" href="css/layui.css" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <style>
+        .backTop {
+            display: block;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: blueviolet;
+            text-align: center;
+            position: fixed;
+            right: 2%;
+            bottom: 20%;
+            z-index: 9999999;
+            display: none;
+        }
+
+        .sy {
+            display: block;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sy img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 头部欢迎、语言选择、支付货币选择部分 -->
+        <div class="header-top">
+            <!-- 欢迎 -->
+            <div class="head-left">
+                <p>欢迎来到Floda线上商店!</p>
+            </div>
+            <div class="head-right">
+                <!-- 语言选择 -->
+                <ul class="lang">
+                    <li>
+                        <span>语言</span>
+                        <img src="img/icon/en.png">
+                        英文
+                        <ul class="yc1">
+                            <li>
+                                <a href="#">
+                                    <img src="img/icon/en.png" alt="">&nbsp;英文
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="img/icon/fr.png" alt="">&nbsp;法语
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 货币选择 -->
+                    <li>
+                        <span>支付货币</span>
+                        美元$
+                        <ul class="yc2">
+                            <li>
+                                <a href="#">
+                                    &nbsp;美元$
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    &nbsp;欧元€
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="top-main">
+            <!-- logo -->
+            <div class="logo">
+                <a href="#">
+                    <img src="img/logo/logo.png">
+                </a>
+            </div>
+            <div class="top-main-mid">
+                <!-- 导航栏 -->
+                <ul class="nav">
+                    <li>
+                        <a href="index.html">
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="goodslist.html">
+                            花店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="details.html">
+                            产品细节
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-main-right">
+                <!-- 搜索、个人、喜欢、购物车 -->
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="sous">
+                                <img src="img/搜索.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="login.html">
+                            <i class="self">
+                                <img src="img/个人.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="cart.html">
+                            <i class="cart">
+                                <img src="img/购物车.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="detali-tit">
+        <div class="tii-main">
+            <h1>订单结算</h1>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" class="sy">
+                        <img src="img/主页.png" alt="">
+                    </a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #CC2121;">&nbsp;/&nbsp;结算详情</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content content-nav-base shopcart-content">
+        <div class="cart w1200">
+            <div class="cart-table-th">
+
+                <div class="th th-item">
+                    <div class="th-inner">
+                        订单编号
+                    </div>
+                </div>
+                <div class="th th-price">
+                    <div class="th-inner">
+                        商品信息
+                    </div>
+                </div>
+                <div class="th th-amount">
+                    <div class="th-inner">
+                        订单金额
+                    </div>
+                </div>
+                <div class="th th-Id">
+                    <div class="th-inner">
+                        订单地址
+                    </div>
+                </div>
+                <div class="th th-amount">
+                    <div class="th-inner">
+                        订单状态
+                    </div>
+                </div>
+                <div class="th th-amount">
+                    <div class="th-inner">
+                        订单时间
+                    </div>
+                </div>
+            </div>
+            <div class="OrderList">
+                <div class="order-content" id="list-cont">
+                    <ul class="item-content layui-clear">
+
+                        <li class="th th-item">
+                            <div class="item-cont">
+                                <div class="text">
+                                    <div class="title">66</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="th th-price">
+                            <span class="th-su">[{"goodsName":"丽桑卓","goodsSize":"S","goodsNum":"1","cartId":"77"},{"goodsName":"丽桑卓","goodsSize":"M","goodsNum":"2","cartId":"81"},{"goodsName":"丽桑卓","goodsSize":"L","goodsNum":"3","cartId":"82"},{"goodsName":"丽桑卓","goodsSize":"XL","goodsNum":"4","cartId":"83"}]</span>
+                        </li>
+                        <li class="th th-amount">
+                            <div class="box-btn layui-clear">
+                                6666
+                            </div>
+                        </li>
+                        <li class="th th-sum">
+                            <span class="sum">江西省南昌市青山湖区中兴产业科技园</span>
+                        </li>
+                        <li class="th th-op">
+                            <span class="dele-btn">待支付</span>
+                        </li>
+                        <li class="th th-op">
+                            <span class="dele-btn">2022-12-22 18:00:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="FloatBarHolder layui-clear">
+                <div class="th Settlement">
+                    <button class="layui-btn">支付</button>
+                </div>
+                <div class="th total">
+                    <p>应付：<span class="pieces-total">0</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:" class="backTop">
+        <img src="img/箭头 上.png" width="80%">
+    </a>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            var check_all = document.querySelector("#allCheckked")
+            var ceks = document.querySelectorAll(".CheckBoxShop")
+            var check_all1 = document.querySelector(".FloatBarHolder .check-all")
+            var check_count = document.querySelector(".FloatBarHolder .Selected-pieces")
+            check_all.addEventListener("click", function () {
+                var count = 0
+                for (var i = 0; i < ceks.length; i++) {
+                    ceks[i].checked = check_all.checked
+
+                }
+                for (var k = 0; k < ceks.length; k++) {
+                    if (ceks[k].checked) {
+                        count++
+                    }
+                }
+                check_count.innerText = count
+                totalPrice()
+            })
+            for (var i = 0; i < ceks.length; i++) {
+                ceks[i].addEventListener("click", function () {
+                    var count = 0
+                    var bool = true
+                    for (var j = 0; j < ceks.length; j++) {
+                        if (ceks[j].checked != true) {
+                            bool = false;
+                            break;
+                        }
+
+                    }
+                    for (var k = 0; k < ceks.length; k++) {
+                        if (ceks[k].checked) {
+                            count++
+                        }
+                    }
+                    if (bool) {
+                        check_all.checked = bool
+                    } else {
+                        check_all.checked = bool
+                    }
+                    check_count.innerText = count
+                    totalPrice()
+                })
+
+            }
+            document.body.addEventListener("click", function (e) {
+                var less = document.querySelectorAll(".less")
+                var add = document.querySelectorAll(".add")
+                if (e.target.innerText == "+") {
+                    var num = Number(e.target.previousElementSibling.value) + 1
+                    e.target.previousElementSibling.value = num
+                    var price = Number(e.target.parentElement.parentElement.previousElementSibling.children[0].innerText)
+                    e.target.parentElement.parentElement.nextElementSibling.children[0].innerText = (num * price).toFixed(2)
+                    totalPrice()
+                } else if (e.target.innerText == "-") {
+                    if (e.target.nextElementSibling.value > 1) {
+                        var num = Number(e.target.nextElementSibling.value) - 1
+                        e.target.nextElementSibling.value = num
+                        var price = Number(e.target.parentElement.parentElement.previousElementSibling.children[0].innerText)
+                        e.target.parentElement.parentElement.nextElementSibling.children[0].innerText = (num * price).toFixed(2)
+                        totalPrice()
+                    } else {
+                        alert("数量不能小于0")
+                    }
+
+                } else if (e.target.innerText == "删除") {
+                    if (confirm("是否删除")) {
+                        e.target.parentElement.parentElement.remove()
+                        totalPrice()
+                    }
+                } else if (e.target.innerText == "批量删除") {
+                    if (confirm("是否删除")) {
+                        for (var i = ceks.length - 1; i >= 0; i--) {
+                            if (ceks[i].checked) {
+                                ceks[i].parentElement.parentElement.parentElement.parentElement.remove();
+                                totalPrice()
+                            }
+                        }
+                        check_count.innerText = 0
+                        check_all1.checked = false
+                    }
+
+                }
+
+            })
+
+            function totalPrice() {
+                var total = 0
+                ceks = document.querySelectorAll(".CheckBoxShop")
+                for (var i = 0; i < ceks.length; i++) {
+                    if (ceks[i].checked) {
+                        total += parseInt(ceks[i].parentElement.parentElement.parentElement.parentElement.children[4].innerText)
+                    }
+                }
+
+                document.querySelector(".pieces-total").innerText = total + ".00"
+            }
+
+
+        })
+
+        var header = document.querySelector(".top-main");
+        var backTop = document.querySelector(".backTop")
+        window.addEventListener("scroll", function () {
+            var topScroll = document.body.scrollTop || document.documentElement.scrollTop;//滚动的距离,距离顶部的距离
+            var space = document.querySelector(".detali-tit");
+            var spaceOffsetHeight = space.offsetTop
+            console.log(spaceOffsetHeight, 'navOffsetHeight')
+            if (topScroll > spaceOffsetHeight) {
+                header.style.position = 'fixed';
+                header.style.top = '0';
+                header.style.zIndex = '9999';
+                header.style.backgroundColor = "white"
+                header.style.width = "100%"
+                backTop.style.display = "block"
+            } else {
+                header.style.position = 'static';
+                backTop.style.display = "none"
+            }
+        })
+
+        backTop.addEventListener("click", function () {
+            //toTop 滚动到顶部
+            var currentPosition, timer;
+            var speed = 10;
+            timer = setInterval(function () {
+                currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+                currentPosition -= speed; //speed变量
+                if (currentPosition > 0) {
+                    window.scrollTo(0, currentPosition);
+                } else {
+                    window.scrollTo(0, 0);
+                    clearInterval(timer);
+                }
+            }, 1);
+        })
+    </script>
+</body>
+
+</html>

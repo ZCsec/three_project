@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Pay</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/pay.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/layui.css" />
+    <link href="../static/layui/css/layui.css" rel="stylesheet">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <style>
+        .backTop {
+            display: block;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: blueviolet;
+            text-align: center;
+            position: fixed;
+            right: 2%;
+            bottom: 20%;
+            z-index: 9999999;
+            display: none;
+        }
+
+        .sy {
+            display: block;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sy img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 头部欢迎、语言选择、支付货币选择部分 -->
+        <div class="header-top">
+            <!-- 欢迎 -->
+            <div class="head-left">
+                <p>欢迎来到Floda线上商店!</p>
+            </div>
+            <div class="head-right">
+                <!-- 语言选择 -->
+                <ul class="lang">
+                    <li>
+                        <span>语言</span>
+                        <img src="../static/img/icon/en.png">
+                        英文
+                        <ul class="yc1">
+                            <li>
+                                <a href="#">
+                                    <img src="../static/img/icon/en.png" alt="">&nbsp;英文
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="../static/img/icon/fr.png" alt="">&nbsp;法语
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- 货币选择 -->
+                    <li>
+                        <span>支付货币</span>
+                        美元$
+                        <ul class="yc2">
+                            <li>
+                                <a href="#">
+                                    &nbsp;美元$
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    &nbsp;欧元€
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="top-main">
+            <!-- logo -->
+            <div class="logo">
+                <a href="#">
+                    <img src="../static/img/logo/logo.png">
+                </a>
+            </div>
+            <div class="top-main-mid">
+                <!-- 导航栏 -->
+                <ul class="nav">
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/goodList?&userType={{userType}}&userId={{userId}}">
+                            花店
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId=1&userType={{userType}}&userId={{userId}}">
+                            产品细节
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-main-right">
+                <!-- 搜索、个人、喜欢、购物车 -->
+                <ul>
+                    <li style="display:none">
+                        <a href="#">
+                            <i class="sous">
+                                <img src="../static/../static/img/搜索.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                    <li style="display:{{userType==1?"none":"none"}}>
+                        <a href="login.html" style="display:{{userType==1?"none":"none"}} >
+                            <i class="self" style="display:{{userType==1?"none":"none"}}>
+                                <img src="../static/../static/img/个人.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/getShopCart?userId={{userId}}&userType={{userType}}">
+                            <i class="cart">
+                                <img src="../static/../static/img/购物车.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="detali-tit">
+        <div class="tii-main">
+            <h1>订单结算</h1>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" class="sy">
+                        <img src="../static/img/主页.png" alt="">
+                    </a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #CC2121;">&nbsp;/&nbsp;结算详情</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content content-nav-base shopcart-content">
+        <div class="cart w1200">
+            <div class="cart-table-th">
+
+                <div class="th th-item">
+                    <div class="th-inner">
+                        订单编号
+                    </div>
+                </div>
+                <div class="th th-price">
+                    <div class="th-inner">
+                        商品信息
+                    </div>
+                </div>
+                <div class="th th-amount">
+                    <div class="th-inner">
+                        订单金额
+                    </div>
+                </div>
+                <div class="th th-Id">
+                    <div class="th-inner">
+                        订单地址
+                    </div>
+                </div>
+                <div class="th th-amount">
+                    <div class="th-inner">
+                        订单状态
+                    </div>
+                </div>
+                <div class="th th-amount">
+                    <div class="th-inner">
+                        订单时间
+                    </div>
+                </div>
+            </div>
+            <div class="OrderList">
+                <div class="order-content" id="list-cont">
+                    
+                    <ul class="item-content layui-clear">
+                        <li class="th th-item">
+                            <div class="item-cont">
+                                <div class="text">
+                                    <div class="title">{{payMsg.orderId}}</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="th th-price">
+                            {{each goodsAll}}
+                                <div class="th-su" style="margin:20px 0;display:flex;position:relative;top:-50px">
+                                    <p style="width:50%;display:inline-block">
+                                        
+                                        <img style="width:50%;border:2px solid #000" src="../static/img/product/{{$value.goodsImgSrc}}">
+                                    </p>
+                                    <div style="display:inline-block;text-align:left;height:125px">
+                                        <p style="height:33%">名称:<span style="font-weight:bold;margin-left:5px">{{$value.goodsName}}</span></p>
+                                        <p style="height:33%">尺寸:<span style="font-weight:bold;margin-left:5px">{{$value.goodsSize}}</span></p>
+                                        <p style="height:33%">数量:<span style="font-weight:bold;margin-left:5px">{{$value.goodsNum}}</span></p>
+                                    </div>
+                                </div>
+                            {{/each}}
+                        </li>
+                        <li class="th th-amount">
+                            <div class="box-btn layui-clear">
+                                {{payMsg.orderPrice}}
+                            </div>
+                        </li>
+                        <li class="th th-sum">
+                            <span class="sum">{{payMsg.userAddress}}</span>
+                        </li>
+                        <li class="th th-op">
+                            <span class="dele-btn">{{payMsg.orderState}}</span>
+                        </li>
+                        <li class="th th-op">
+                            <span class="dele-btn">{{payMsg.orderTime}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+            <div class="FloatBarHolder layui-clear">
+                <div class="th Settlement">
+                    <button class="layui-btn btnPay">支付</button>
+                </div>
+                <div class="th total">
+                    <p>应付：<span class="pieces-total">{{payMsg.orderPrice}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:" class="backTop">
+        <img src="../static/img/箭头 上.png" width="80%">
+    </a>
+    <script type="text/javascript">
+        var header = document.querySelector(".top-main");
+        var backTop = document.querySelector(".backTop")
+        window.addEventListener("scroll", function () {
+            var topScroll = document.body.scrollTop || document.documentElement.scrollTop;//滚动的距离,距离顶部的距离
+            var space = document.querySelector(".detali-tit");
+            var spaceOffsetHeight = space.offsetTop
+            console.log(spaceOffsetHeight, 'navOffsetHeight')
+            if (topScroll > spaceOffsetHeight) {
+                header.style.position = 'fixed';
+                header.style.top = '0';
+                header.style.zIndex = '9999';
+                header.style.backgroundColor = "white"
+                header.style.width = "100%"
+                backTop.style.display = "block"
+            } else {
+                header.style.position = 'static';
+                backTop.style.display = "none"
+            }
+        })
+
+        backTop.addEventListener("click", function () {
+            //toTop 滚动到顶部
+            var currentPosition, timer;
+            var speed = 10;
+            timer = setInterval(function () {
+                currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+                currentPosition -= speed; //speed变量
+                if (currentPosition > 0) {
+                    window.scrollTo(0, currentPosition);
+                } else {
+                    window.scrollTo(0, 0);
+                    clearInterval(timer);
+                }
+            }, 1);
+        })
+    </script>
+    <script src="../static/layui/layui.js"></script>
+    <script src="../static/js/axios.js"></script>
+    <script>
+        // 获取支付按钮 并创建点击事件
+        document.querySelector(".btnPay").addEventListener("click",function(){
+            var orderId = {{orderId}};
+            var userId = {{userId}};
+            var userType = {{userType}};
+            // 获取当前时间 
+            function times(){//时间的方法函数
+				//创建一个当前日期对象
+				var d=new Date();
+				var y=d.getFullYear(); //年
+				var m=d.getMonth()+1;  //月
+				var dd=d.getDate();  //日
+				var hh=d.getHours();  //时
+				var min=d.getMinutes();  //分
+				var ss=d.getSeconds();  //秒
+				var s=y+'-'+m+'-'+dd+' '+hh+':'+min+':'+ss;
+				return s;
+			}
+            var time = times();
+            var params = {
+                orderId:orderId,
+                userId:userId,
+                userType:userType,
+                time:time
+            }
+            //接口地址
+            var updatePay = 'http://127.0.0.1:3000/admin/updatePay'
+            axios({
+                method:"post",
+                url:updatePay,
+                data:params
+            }).then((res)=>{
+                // alert(res.data)
+                layer.msg(res.data);
+                setTimeout(()=>{
+                    location.reload()
+                    window.location.href = 'http://127.0.0.1:3000/admin/getShopCart?userId='+userId+'&userType='+userType;
+                },1500)
+            })
+
+        })
+
+    </script>
+</body>
+
+</html>

@@ -38,7 +38,7 @@ goodsAdmin.get('/getGoodsType',(req,res)=>{
         var goodsId = req.query.goodsId;
         var sql = 'select * from goods where goodsId = ?';
         db.query(sql,[goodsId],(err,results)=>{
-            if(err) return res.send(err.message);
+            if(err) return console.log(err.message);
             res.render("goodsAdmin-edit",{type:type,goods:results[0],userType:req.query.userType,userId:req.query.userId,page:req.query.page,goodsId:req.query.goodsId});
         })
     }
