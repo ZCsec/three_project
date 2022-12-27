@@ -67,7 +67,7 @@
             <div class="title">
                 <h4>用户</h4>
                 <span class="title">找到{{usersData.length}}个用户</span>
-                <form class="form-inline" id="search-box" method="post" action="http://127.0.0.1:3000/admin/getSearchUser?page={{page}}&userId={{userId}}&userType={{userType}}">
+                <form class="form-inline" id="search-box" method="post" action="http://127.0.0.1:3000/admin/getSearchUser?page={{searchPage}}&userId={{userId}}&userType={{userType}}">
                     <div class="form-group" id="search-text">
                         <label for="exampleInputName2"></label>
                         <input style="" type="text" class="form-control" name="content" id="exampleInputName2" placeholder="搜索用户信息(请输入关键字)">
@@ -97,8 +97,8 @@
                     <td>{{$value.userSex}}</td>
                     <td>{{$value.userType}}</td>
                     <td>
-                        <a href="http://127.0.0.1:3000/admin/getUserType?type=2&userType={{userType}}&userId={{userId}}&nowUserType={{$value.userType}}&nowUserId={{$value.userId}}&page={{page}}"  class="glyphicon glyphicon-edit"></a>
-                        <i class="glyphicon glyphicon-remove" userType={{userType}} userId={{userId}} data-page="{{page}}" data-userId="{{$value.userId}}" data-userType="{{$value.userType}}" data-toggle="modal" data-target=".confirm-modal"></i>
+                        <a href="http://127.0.0.1:3000/admin/getUserType?type=2&userType={{userType}}&userId={{userId}}&nowUserType={{$value.userType}}&nowUserId={{$value.userId}}&page={{searchPage}}"  class="glyphicon glyphicon-edit"></a>
+                        <i class="glyphicon glyphicon-remove" userType={{userType}} userId={{userId}} data-page="{{searchPage}}" data-userId="{{$value.userId}}" data-userType="{{$value.userType}}" data-toggle="modal" data-target=".confirm-modal"></i>
                     </td>
                 </tr>
                 {{/each}}
@@ -107,17 +107,17 @@
             <!-- /内容列表 -->
             <!-- 分页 -->
             <ul class="pagination">
-                <li style="display:{{page>1?"inline":"none"}}">
-                    <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}&page={{page-0-1}}">
+                <li style="display:{{searchPage>1?"inline":"none"}}">
+                    <a href="http://127.0.0.1:3000/admin/getSearchUser?userType={{userType}}&userId={{userId}}&page={{page-0-1}}&searchPage={{searchPage}}">
 			        <span>&laquo;</span>
 			      </a>
                 </li>
 
                     <% for(var i=1;i<=total;i++){ %>
-                    <li><a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}&page=<%=i%>"><%=i%></a></li>
+                    <li><a href="http://127.0.0.1:3000/admin/getSearchUser?userType={{userType}}&userId={{userId}}&searchPage=<%=i%>&searchContent={{searchContent}}"><%=i%></a></li>
                     <% } %> 
-                <li style="display:{{page==total?"none":"inline"}}">
-                    <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}&page={{page-0+1}}">
+                <li style="display:{{searchPage==total?"none":"inline"}}">
+                    <a href="http://127.0.0.1:3000/admin/getSearchUser?userType={{userType}}&userId={{userId}}&page={{page-0+1}}&searchPage={{searchPage}}">
 			        <span>&raquo;</span>
 			      </a>
                 </li>

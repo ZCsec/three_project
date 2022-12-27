@@ -16,8 +16,33 @@ a, a:hover {
 	text-decoration: none;
 }
 
-a:hover {
+#search-box{
+	/* border:1px solid red; */
+	position:absolute;
+	left:22%;
+	bottom:0;
+	width:600px;
+	height: 40px;
+}
 
+.disClick{
+	pointer-events: none !important;
+}
+
+.hasClick{
+	pointer-events: auto !important;
+}
+
+#search-text{
+	width: 90%;
+	/* border: 1px solid red; */
+	position: relative;
+	top: -8px;
+}
+
+#exampleInputName2{
+	width: 100%;
+	position: absolute;
 }
 
 h4 {
@@ -50,6 +75,7 @@ h4 {
 	color: #FFF;
 	font-size: 18px;
 	font-weight: bold;
+	/* background-image: linear-gradient(100deg,#bb1ce747,#e71c61ad); */
 	background-image: linear-gradient(100deg,#1c5de7,#1c91e7);
 }
 
@@ -130,9 +156,7 @@ h4 {
 	margin-top: 50px;
 }
 
-.menu li {
 
-}
 
 .menu .item {
 	display: block;

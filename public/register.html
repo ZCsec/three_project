@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>注册</title>
     <link rel="stylesheet" href="css/register.css">
+    <link href="./layui/css/layui.css" rel="stylesheet">
     <script src="js/register.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script src="./js/axios.js"></script>
 </head>
 
 <body>
@@ -27,7 +30,7 @@
                     <span class="yi">已有帐号，</span>
                     <a href="login.html">立即登录</a>
                 </div>
-                <form class="big" method="post" action="http://127.0.0.1:3000/admin/register">
+                <div class="big">
                     <div class="eye">
                         <img src="https://img.js.design/assets/img/62b282baf59c9f23db7e6368.png" alt="">
                     </div>
@@ -39,11 +42,11 @@
                     <input type="password" name="password2" placeholder="确认密码" class="password">
                     <p class="p-4 ">两次输入的密码要一致</p>
                     <p class="sex-text">
-                        绅士:<input type="radio" name="sex" value="男">
+                        绅士:<input type="radio" name="sex" value="男" checked>
                         女士:<input type="radio" name="sex" value="女">
                     </p>
                     <button type="submit" class="dlanniu">立即注册</button>
-                </form>
+                </div>
             </div>
         </div>
     </div>

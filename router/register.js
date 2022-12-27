@@ -4,9 +4,9 @@ const db = require('../connect/connection')
 
 register.post('/register',(req,res)=>{
     var sql = 'insert into user(userName,userPwd,userSex,userType) values(?,?,?,default)';
-    db.query(sql,[req.body.name,req.body.password,req.body.sex],(err,results)=>{
+    db.query(sql,[req.body.userName,req.body.userPwd,req.body.userSex],(err,results)=>{
         if(err) return res.send(err.message);    
-        res.redirect('../static/login.html')
+        res.send("注册成功")
     })
 })
 

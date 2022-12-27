@@ -157,7 +157,8 @@
         </div>
     </div>
 
-    <div class="content content-nav-base shopcart-content">
+    {{if shopCartData.length > 0}}
+    <div class="content content-nav-base shopcart-content"">
         <div class="cart w1200">
             <div class="cart-table-th">
                 <div class="th th-chk">
@@ -255,6 +256,12 @@
                 </div>
             </div>
     </div>
+    {{else}}
+        <p style="border:3px solid #888;line-height:100px;text-align:center;font-size:22px">
+            您的购物车空空如也~
+            <a style="color:red;font-size:16px;font-weight:bold" href="http://127.0.0.1:3000/admin/goodList?&userType={{userType}}&userId={{userId}}">去花店</a>    
+        </p>
+    {{/if}}
     <a href="javascript:" class="backTop">
         <img src="../static/img/箭头 上.png" width="80%">
     </a>
@@ -315,7 +322,7 @@
 
             // 先定义接口地址：http://127.0.0.1:3000/admin/updateShopCart
             var url = 'http://127.0.0.1:3000/admin/updateShopCart';
-            var urlDel = 'http://127.0.0.1:3000/admin/delShopCart'
+            var urlDel = 'http://127.0.0.1:3000/admin/delGoods'
             
             // 购物车操作兼更新数据库
             document.body.addEventListener("click", function (e) {
@@ -477,7 +484,7 @@
         })
     </script>
 
-        <script type="text/javascript">
+    <script type="text/javascript">
         // 点击结算按钮 发送结算请求
         // 获取结算按钮
         var payBtn =  document.querySelector(".pay");
