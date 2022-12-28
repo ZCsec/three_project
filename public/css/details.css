@@ -5,7 +5,7 @@
 
 a {
     text-decoration: none;
-    color: black;
+    color: black !important;
 }
 
 ul {
@@ -15,6 +15,45 @@ ul {
 ul li {
     float: left;
 }
+
+#setAddress{
+    cursor: pointer;
+}
+
+.address{
+    position: relative;
+}
+
+
+#addressBox{
+    /* border: 1px solid red; */
+    width:550px;
+    height: 270px;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    position: absolute;
+    left: -250px;
+    top: 20px;
+    background-color: #fff;
+    box-shadow: 0 0  10px rgba(0, 0, 0, 0.3);
+    z-index: 99;
+    display: none;
+}
+
+#addressBox .addressBox2{
+    height: 80%;
+    /* border:1px solid red; */
+    margin: 25px 0;
+}
+
+#closeBtn{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
 
 .header {
     height: 30px;
@@ -259,7 +298,7 @@ h5 {
 }
 
 .quantity .pro-qty {
-    width: 80px;
+    width: 108px;
     height: 40px;
     border: 1px solid #ddd;
     padding: 0 15px;

@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../static/css/goodslist.css">
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet" />
+
     <style>
         .backTop {
             display: block;
@@ -51,40 +53,61 @@
             </div>
             <div class="head-right">
                 <!-- 语言选择 -->
-                <ul class="lang">
+                <!-- 语言选择 -->
+            <ul class="lang">
+                    <!-- 地址选择 -->
+                    <li class="address">
+                        {{if province != null}}
+                            <span style="font-weight:bold;color:#A31A1A" id="setAddress">{{province}}</span>
+                        {{else}}
+                            <span style="font-weight:bold;color:#A31A1A" id="setAddress">设置地址</span>
+                        {{/if}}
+                        <div  id = "addressBox">
+                            <span class="glyphicon glyphicon-remove" id="closeBtn"></span>
+                            <div class="addressBox2">
+                                <form class="form-inline" method="post" action="http://127.0.0.1:3000/admin/setAddress?userType={{userType}}&userId={{userId}}&province={{province}}"> 
+                                    <div data-toggle="distpicker"> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="province1">Province</label> 
+                                            <select class="form-control" name="province" id="province1"></select> 
+                                        </div> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="city1">City</label> 
+                                            <select class="form-control" name="city" id="city1"></select> 
+                                        </div> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="district1">District</label> 
+                                            <select class="form-control" name="district" id="district1"></select> 
+                                        </div> 
+                                            <div class="form-group" style="display:block;width:100%;margin:10px 0">
+                                            <label for="exampleInputName2">详细地址</label>
+                                            <input style="width:80%" type="text" class="form-control" id="exampleInputEmail1" name="addressMsg" placeholder="请输入详细地址">
+                                        </div>
+                                            <div style="margin:10px 0;width:100%;">
+                                            <label for="exampleInputName2">收件人</label>
+                                            <input style="width:80%;margin-left:10px" type="text" class="form-control" id="exampleInputEmail1" name="userMsg" placeholder="请输入收件人名称">
+                                        </div>
+                                            <div  style="margin:10px 0;width:100%;">
+                                            <label for="exampleInputName2">联系电话</label>
+                                            <input style="width:80%" type="text" class="form-control" id="exampleInputEmail1" name="phoneMsg" placeholder="请输入联系电话">
+                                        </div>
+                                        <div class="form-group;width:100%;">
+                                            <button class="btn btn-default" style="width:80px" type="submit">确认</button>
+                                        </div>
+                                    </div> 
+                                </form> 
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 语言选择 -->
                     <li>
                         <span>语言</span>
-                        <img src="../static/img/icon/en.png">
-                        英文
-                        <ul class="yc1">
-                            <li>
-                                <a href="#">
-                                    <img src="../static/img/icon/en.png" alt="">&nbsp;英文
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="../static/img/icon/fr.png" alt="">&nbsp;法语
-                                </a>
-                            </li>
-                        </ul>
+                        中文
                     </li>
                     <!-- 货币选择 -->
                     <li>
                         <span>支付货币</span>
-                        美元$
-                        <ul class="yc2">
-                            <li>
-                                <a href="#">
-                                    &nbsp;美元$
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    &nbsp;欧元€
-                                </a>
-                            </li>
-                        </ul>
+                        人民币￥
                     </li>
                 </ul>
             </div>
@@ -100,17 +123,17 @@
                 <!-- 导航栏 -->
                 <ul class="nav">
                     <li>
-                        <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
+                        <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}&province={{province}}">
                             首页
                         </a>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:3000/admin/goodList?&userType={{userType}}&userId={{userId}}">
+                        <a href="http://127.0.0.1:3000/admin/goodList?&userType={{userType}}&userId={{userId}}&province={{province}}">
                             花店
                         </a>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId=1&userType={{userType}}&userId={{userId}}">
+                        <a style="width:100px" href="http://127.0.0.1:3000/admin/goodsDetail?goodsId=1&userType={{userType}}&userId={{userId}}&province={{province}}">
                             产品细节
                         </a>
                     </li>
@@ -134,7 +157,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:3000/admin/getShopCart?userId={{userId}}&userType={{userType}}">
+                        <a href="http://127.0.0.1:3000/admin/getShopCart?userId={{userId}}&userType={{userType}}&province={{province}}">
                             <i class="cart">
                                 <img src="../static/img/购物车.png" alt="" width="100%">
                             </i>
@@ -278,10 +301,10 @@
             <!-- 此处需要模板 -->
                 {{each goodsMsg}}
                 <div class="product-item1">
-                    <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}">
+                    <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{province}}">
                         <img src="../static/img/product/{{$value.goodsImgSrc}}" alt="">
                     </a>
-                    <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}" class="product-name">
+                    <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{province}}" class="product-name">
                         {{$value.goodsName}}
                     </a>
                     <span class="price-regular">${{$value.goodsPrice}} <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
@@ -292,7 +315,7 @@
                         <span>30%</span>
                     </div>
                     <div class="addcar">
-                        <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}">
+                        <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{province}}">
                             <img src="../static/img/购物车.png" style="border: none;">
                         </a>
                     </div>
@@ -301,11 +324,11 @@
             </div>
             <div class="paginatoin-area text-center">
                 <ul class="pagination-box">
-                    <li style="display:{{page>1?"inline":"none"}};border:1px solid red;"><a class="previous" href="http://127.0.0.1:3000/admin/goodList?page={{page-0-1}}&userType={{userType}}&userId={{userId}}">&lt;</a></li>
+                    <li style="display:{{page>1?"inline":"none"}};border:1px solid red;"><a class="previous" href="http://127.0.0.1:3000/admin/goodList?page={{page-0-1}}&userType={{userType}}&userId={{userId}}&province={{province}}">&lt;</a></li>
                     <% for(var i=1;i<=total;i++){ %>
-                    <li style="border:{{page==i?"1px solid black":"none"}}" class="active"><a href="http://127.0.0.1:3000/admin/goodList?page=<%=i%>"><%=i%></a></li>
+                    <li style="border:{{page==i?"1px solid black":"none"}}" class="active"><a href="http://127.0.0.1:3000/admin/goodList?page=<%=i%>&province={{province}}"><%=i%></a></li>
                     <% } %>
-                    <li style="display:{{page==total?"none":"inline"}};border:1px solid red;"><a class="next" href="http://127.0.0.1:3000/admin/goodList?page={{page-0+1}}&userType={{userType}}&userId={{userId}}">&gt;</a></li>
+                    <li style="display:{{page==total?"none":"inline"}};border:1px solid red;"><a class="next" href="http://127.0.0.1:3000/admin/goodList?page={{page-0+1}}&userType={{userType}}&userId={{userId}}&province={{province}}">&gt;</a></li>
                 </ul>
             </div>
         </div>
@@ -366,6 +389,10 @@
         </div>
     </div>
 </body>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script> 
+<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script> 
+<script src="../static/js/distpicker.data.js"></script> 
+<script src="../static/js/distpicker.js"></script>  
 <script>
     var header = document.querySelector(".top-main");
     var backTop = document.querySelector(".backTop")
@@ -401,6 +428,19 @@
                 clearInterval(timer);
             }
         }, 1);
+    })
+</script>
+<script>
+    var setAddress = document.querySelector("#setAddress");
+    var addressBox = document.querySelector("#addressBox");
+    var closeBtn = document.querySelector("#closeBtn");
+
+    setAddress.addEventListener("click",function(){
+        addressBox.style.display = "block";
+    })
+
+    closeBtn.addEventListener("click",function(){
+        addressBox.style.display = "none";
     })
 </script>
 

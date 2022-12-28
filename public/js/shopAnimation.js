@@ -37,12 +37,17 @@
         
         // 用户id
         var userId = window.location.search;
-        userId = userId.substring(userId.indexOf("userId="),userId.lengths)
-        userId = userId.substring(userId.indexOf("=")+1,userId.lengths)
+        userId = userId.substring(userId.indexOf("userId="),userId.indexOf("&province"))
+        userId = userId.substring(userId.indexOf("=")+1,userId.length)
         // 商品id
         var goodsId = window.location.search;
         goodsId = goodsId.substring(goodsId.indexOf("goodsId="),goodsId.indexOf("&userType"))
-        goodsId = goodsId.substring(goodsId.indexOf("=")+1,goodsId.lengths)
+        goodsId = goodsId.substring(goodsId.indexOf("=")+1,goodsId.length)
+        // 当前地址
+        var province = window.location.search;
+        province = province.substring(goodsId.indexOf("province="),province.length);
+        province = province.substring(goodsId.indexOf("=")+1,province.length)
+
 
         var params={
             goodsName:goodsName,
@@ -54,8 +59,9 @@
             goodsSize:goodsSize
         }
 
+        console.log(userId);
         // 接口地址 购物车表 goodsId userId goodsNum goodsPrice totalPrice
-        var url = 'http://127.0.0.1:3000/admin/shopCartMsg'
+        var url = 'http://127.0.0.1:3000/admin/shopCartMsg?' + "province=" + province;
 
         // 当点击按钮时向接口发送ajax请求
         axios({

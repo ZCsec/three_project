@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../static/css/index.css">
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="../static/css/swiper.min.css">
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet" />
 
     <!-- Demo styles -->
     <style>
@@ -144,39 +145,59 @@
             <div class="head-right">
                 <!-- 语言选择 -->
                 <ul class="lang">
+                    <!-- 地址选择 -->
+                    <li class="address">
+                        {{if province != null}}
+                            <span style="font-weight:bold;color:#A31A1A" id="setAddress">{{province}}</span>
+                        {{else}}
+                            <span style="font-weight:bold;color:#A31A1A" id="setAddress">设置地址</span>
+                        {{/if}}
+                        <div  id = "addressBox">
+                            <span class="glyphicon glyphicon-remove" id="closeBtn"></span>
+                            <div class="addressBox2">
+                                <form class="form-inline" method="post" action="http://127.0.0.1:3000/admin/setAddress?userType={{userType}}&userId={{userId}}&province={{province}}"> 
+                                    <div data-toggle="distpicker"> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="province1">Province</label> 
+                                            <select class="form-control" name="province" id="province1"></select> 
+                                        </div> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="city1">City</label> 
+                                            <select class="form-control" name="city" id="city1"></select> 
+                                        </div> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="district1">District</label> 
+                                            <select class="form-control" name="district" id="district1"></select> 
+                                        </div> 
+                                            <div class="form-group" style="display:block;width:100%;margin:10px 0">
+                                            <label for="exampleInputName2">详细地址</label>
+                                            <input style="width:80%" type="text" class="form-control" id="exampleInputEmail1" name="addressMsg" placeholder="请输入详细地址">
+                                        </div>
+                                            <div style="margin:10px 0;width:100%;">
+                                            <label for="exampleInputName2">收件人</label>
+                                            <input style="width:80%;margin-left:10px" type="text" class="form-control" id="exampleInputEmail1" name="userMsg" placeholder="请输入收件人名称">
+                                        </div>
+                                            <div  style="margin:10px 0;width:100%;">
+                                            <label for="exampleInputName2">联系电话</label>
+                                            <input style="width:80%" type="text" class="form-control" id="exampleInputEmail1" name="phoneMsg" placeholder="请输入联系电话">
+                                        </div>
+                                        <div class="form-group;width:100%;">
+                                            <button class="btn btn-default" style="width:80px" type="submit">确认</button>
+                                        </div>
+                                    </div> 
+                                </form> 
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 语言选择 -->
                     <li>
                         <span>语言</span>
-                        <img src="../static/img/icon/en.png">
-                        英文
-                        <ul class="yc1">
-                            <li>
-                                <a href="#">
-                                    <img src="../static/img/icon/en.png" alt="">&nbsp;英文
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="../static/img/icon/fr.png" alt="">&nbsp;法语
-                                </a>
-                            </li>
-                        </ul>
+                        中文
                     </li>
                     <!-- 货币选择 -->
                     <li>
                         <span>支付货币</span>
-                        美元$
-                        <ul class="yc2">
-                            <li>
-                                <a href="#">
-                                    &nbsp;美元$
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    &nbsp;欧元€
-                                </a>
-                            </li>
-                        </ul>
+                        人民币￥
                     </li>
                 </ul>
             </div>
@@ -192,17 +213,17 @@
                 <!-- 导航栏 -->
                 <ul class="nav">
                     <li>
-                        <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}">
+                        <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}&province={{province}}">
                             首页
                         </a>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}">
+                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}&province={{province}}">
                             花店
                         </a>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId=1&userType={{userType}}&userId={{userId}}">
+                        <a style="width:100px" href="http://127.0.0.1:3000/admin/goodsDetail?goodsId=1&userType={{userType}}&userId={{userId}}&province={{province}}">
                             产品细节
                         </a>
                     </li>
@@ -226,7 +247,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="http://127.0.0.1:3000/admin/getShopCart?userId={{userId}}&userType={{userType}}">
+                        <a href="http://127.0.0.1:3000/admin/getShopCart?userId={{userId}}&userType={{userType}}&province={{province}}">
                             <i class="cart">
                                 <img src="../static/img/购物车.png" alt="" width="60%">
                             </i>
@@ -246,7 +267,7 @@
                         <span>情人节礼物</span>
                         <h1>Fresh Your Mind</h1>
                         <h2>&amp; Feeling love</h2>
-                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}" class="btn-hero" tabindex="-1">立即下单</a>
+                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}&province={{province}}" class="btn-hero" tabindex="-1">立即下单</a>
                     </div>
                 </div>
                 <div class="swiper-slide">
@@ -255,7 +276,7 @@
                         <span>情人节礼物</span>
                         <h1>Fresh Your Mind</h1>
                         <h2>&amp; Feeling love</h2>
-                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}" class="btn-hero" tabindex="-1">立即下单</a>
+                        <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}&province={{province}}" class="btn-hero" tabindex="-1">立即下单</a>
                     </div>
                 </div>
             </div>
@@ -275,7 +296,7 @@
             <div class="banner-content">
                 <h2 class="text1">华丽鲜花</h2>
                 <h2 class="text2">爱意永恒</h2>
-                <a class="store-link" href="../static/goodslist.html">立即购买</a>
+                <a class="store-link" href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}&province={{province}}">立即购买</a>
             </div>
         </div>
         <div class="floda1">
@@ -285,7 +306,7 @@
             <div class="banner-content">
                 <h2 class="text1">黑色情人节</h2>
                 <h2 class="text2">致孤单的自己</h2>
-                <a class="store-link" href="../static/goodslist.html">立即购买</a>
+                <a class="store-link" href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}&province={{province}}">立即购买</a>
             </div>
         </div>
         <div class="floda1">
@@ -295,7 +316,7 @@
             <div class="banner-content">
                 <h2 class="text1">刹那烟火</h2>
                 <h2 class="text2">盛开就会凋落</h2>
-                <a class="store-link" href="../static/goodslist.html">立即购买</a>
+                <a class="store-link" href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}&province={{province}}">立即购买</a>
             </div>
         </div>
     </div>
@@ -333,10 +354,10 @@
             {{each goods}}
             <div class="product-item1">
                 <!-- 要做一个商品详情也模板 根据每个不同的商品编号进入不同的商品详情页 -->
-                <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}" >
+                <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{Province}}" >
                     <img src="../static/img/product/{{$value.goodsImgSrc}}" alt="">
                 </a>
-                <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}" class="product-name">
+                <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{Province}}" class="product-name">
                     {{$value.goodsName}}
                 </a>
                 <span class="price-regular">${{$value.goodsPrice}} <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
@@ -347,7 +368,7 @@
                     <span>30%</span>
                 </div>
                 <div class="addcar">
-                    <a href=href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}} ">
+                    <a href=href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{Province}} ">
                         <img src="../static/img/购物车.png" style="border: none;">
                     </a>
                 </div>
@@ -357,7 +378,7 @@
 
         <!-- 查看更多新产品 -->
         <div class="more-new">
-            <a href="../static/details.html">查看更多</a>
+            <a href="http://127.0.0.1:3000/admin/goodList?userType={{userType}}&userId={{userId}}&province={{Province}}">查看更多</a>
         </div>
     </div>
 
@@ -533,7 +554,10 @@
     </a>
     <!-- Swiper JS -->
     <script src="../static/js/swiper.min.js"></script>
-
+    <script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script> 
+    <script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script> 
+    <script src="../static/js/distpicker.data.js"></script> 
+    <script src="../static/js/distpicker.js"></script>  
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper('.swiper-container', {
@@ -619,6 +643,20 @@
                 }
             }, 1);
         })
+    </script>
+    <script>
+        var setAddress = document.querySelector("#setAddress");
+        var addressBox = document.querySelector("#addressBox");
+        var closeBtn = document.querySelector("#closeBtn");
+
+        setAddress.addEventListener("click",function(){
+            addressBox.style.display = "block";
+        })
+
+        closeBtn.addEventListener("click",function(){
+            addressBox.style.display = "none";
+        })
+
     </script>
 </body>
 

@@ -11,8 +11,17 @@ login.post('/login',(req,res)=>{
             if(results[i].userName == req.body.name && results[i].userPwd == req.body.password){
                 // 账号密码全对的情况 但是是普通用户
                 bool = false;
-                var url = 'http://127.0.0.1:3000/admin/loginType'+'?userType=' + results[i].userType + '&userId=' + results[i].userId;
-                return res.redirect(url)
+                // 获取当前用户的所在省市
+                if(results[i].userAddress != null){
+                    var province = results[i].userAddress;
+                    province = province.substring(0,province.indexOf("省")+1 || province.indexOf("市")+1);
+                    console.log(province);
+                    var url = 'http://127.0.0.1:3000/admin/loginType'+'?userType=' + results[i].userType + '&userId=' + results[i].userId + '&province=' + province;
+                    return res.redirect(url)
+                }else{
+                    var url = 'http://127.0.0.1:3000/admin/loginType'+'?userType=' + results[i].userType + '&userId=' + results[i].userId;
+                    return res.redirect(url)
+                }
             }
         }
         // 账号和密码错误情况
@@ -26,11 +35,15 @@ login.post('/login',(req,res)=>{
 login.get('/loginType',async(req,res)=>{
     if(req.query.userType == 1){
         // 普通用户 直接给模板套数据
-        var sql = 'select * from goods';
-        db.query(sql,(err,results)=>{
-            // console.log(results);
+
+        var sql = 'select goodsId,goodsName,goodsPrice,goodsImgSrc,goodsDiscount,userAddress FROM goods JOIN USER WHERE userId=?';
+        // 获取地址
+
+        db.query(sql,[req.query.userId],(err,results)=>{
+            var province = results[0].userAddress;
+            province = province.substring(0,province.indexOf("省")+1 || province.indexOf("市")+1);
             if(err) return res.send(err.message);
-            res.render("index",{goods:results,userId:req.query.userId,userType:req.query.userType})
+            res.render("index",{goods:results,userId:req.query.userId,userType:req.query.userType,province:province})
         })
     }else if(req.query.userType == 0){
         // 超级管理员登录
@@ -71,7 +84,7 @@ login.get('/goodsDetail',(req,res)=>{
         if(err) return console.log(err.message);
         // goodsMsg 商品详情信息  userType 用户类型
         // console.log(results);
-        res.render("detail",{goodsMsg:results,userType:userType,userId:userId})
+        res.render("detail",{goodsMsg:results,userType:userType,userId:userId,province:req.query.province})
     })
 })
 
@@ -127,12 +140,12 @@ login.post('/shopCartMsg',(req,res)=>{
 login.get('/getShopCart',(req,res)=>{
     var userId = req.query.userId;
     var userType = req.query.userType;
-    // console.log(userType);
+    // console.log(req.query);
     var sql = 'SELECT * FROM shopcart JOIN goods ON shopcart.`goodsId` = goods.`goodsId` WHERE userId = ?';
     db.query(sql,[userId],(err,results)=>{
         if(err) return console.log(err.message);
         // console.log(results);
-        res.render("shopcart",{shopCartData:results,userId:userId,userType:userType})
+        res.render("shopcart",{shopCartData:results,userId:userId,userType:userType,province:req.query.province})
     })
 })
 
@@ -192,7 +205,7 @@ login.get('/goodList',async(req,res)=>{
     var sql = 'select * from goods limit ?,?'
     db.query(sql,[(page-1)*pageSize,pageSize],(err,results)=>{
         if(err) return console.log(err.message);
-        res.render("goodslist",{goodsMsg:results,userType:req.query.userType,userId:req.query.userId,page:page,total:total})
+        res.render("goodslist",{goodsMsg:results,userType:req.query.userType,userId:req.query.userId,page:page,total:total,province:req.query.province})
     }) 
     
 })

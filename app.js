@@ -30,6 +30,8 @@ const goodsAdmin = require('./router/goodsAdmin')
 const shopCart = require('./router/shopCart')
 const ordersAdmin = require('./router/ordersAdmin')
 const pay = require('./router/pay')
+const address = require('./router/address')
+
 app.use('/admin',login)
 app.use('/admin',register)
 app.use('/admin',userAdmin)
@@ -37,6 +39,7 @@ app.use('/admin',goodsAdmin)
 app.use('/admin',shopCart)
 app.use('/admin',ordersAdmin)
 app.use('/admin',pay)
+app.use('/admin',address)
 
 app.listen('3000',function(){
     console.log('running at http://127.0.0.1:3000')

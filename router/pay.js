@@ -9,18 +9,20 @@ pay.post('/pay',(req,res)=>{
     db.query(sql,[req.body.orderId],(err,results)=>{
         if(err) return console.log(err.message);
         results =  formatDate(results);
-        res.render("payPage",{payMsg:results[0]}); 
+        res.render("payPage",{payMsg:results[0],province:req.query.province}); 
     })
 })
 
 pay.get('/pay',(req,res)=>{
-    var sql = 'select * from orders where orderId=?';
+    var sql = 'SELECT * FROM orders JOIN USER ON orders.`userId` = user.`userId` WHERE orderId = ?';
     db.query(sql,[req.query.orderId],(err,results)=>{
         if(err) return console.log(err.message);
         results =  formatDate(results);
         var goodsAll = results[0].goodsAll;
         var goodsAll = JSON.parse(goodsAll)
-        res.render("payPage",{payMsg:results[0],goodsAll:goodsAll,orderId:req.query.orderId,userId:req.query.userId,userType:req.query.userType}); 
+        // console.log(req.query.province);
+        // console.log(results[0].userAddress);
+        res.render("payPage",{payMsg:results[0],goodsAll:goodsAll,orderId:req.query.orderId,userId:req.query.userId,userType:req.query.userType,province:req.query.province}); 
     })
 })
 
@@ -38,7 +40,7 @@ pay.post('/updatePay',(req,res)=>{
 
 pay.get('/getWaitPay',(req,res)=>{
     // console.log(req.query);
-    var sql = 'select * from orders where orderState="待支付" and userId=?';
+    var sql = 'SELECT orderId,goodsAll,orderPrice,orders.userId,orderState,orderTime,userAddress FROM orders JOIN USER ON orders.`userId` = user.`userId` WHERE orderState="待支付" AND user.userId=?';
     db.query(sql,[req.query.userId],(err,results)=>{
         if(err) return console.log(err.message);
         results =  formatDate(results);
@@ -47,7 +49,7 @@ pay.get('/getWaitPay',(req,res)=>{
             var goodsAll = JSON.parse(goodsAll)
             results[i].goodsAll = goodsAll
         } 
-        res.render("order",{payMsg:results,userId:req.query.userId,userType:req.query.userType})
+        res.render("order",{payMsg:results,userId:req.query.userId,userType:req.query.userType,province:req.query.province})
     })
 })
 
