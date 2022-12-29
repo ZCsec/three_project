@@ -577,7 +577,7 @@
             }).then((res)=>{
                 // console.log(res.data)
                 // 结算的同时要将之前的选中的几件商品在购物车中删除  goodsAll列表中的cartId  通过删除接口删除
-                if(res.data){
+                if(res.data != "请选中商品"){
                     // alert("结算成功")
                     layer.msg('结算成功'); 
                     // 返回的订单Id
@@ -613,6 +613,8 @@
                             }
                         })
                     
+                }else if(res.data=="请选中商品"){
+                    layer.msg('请选择商品!'); 
                 }
             })
         })

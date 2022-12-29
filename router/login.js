@@ -41,7 +41,9 @@ login.get('/loginType',async(req,res)=>{
 
         db.query(sql,[req.query.userId],(err,results)=>{
             var province = results[0].userAddress;
-            province = province.substring(0,province.indexOf("省")+1 || province.indexOf("市")+1);
+            if(province != null){
+                province = province.substring(0,province.indexOf("省")+1 || province.indexOf("市")+1);
+            }
             if(err) return res.send(err.message);
             res.render("index",{goods:results,userId:req.query.userId,userType:req.query.userType,province:province})
         })
@@ -177,7 +179,7 @@ login.post('/delGoods',(req,res)=>{
 // 结算后删除购物车内商品操作接口
 login.post('/delShopCart',(req,res)=>{
     var cartIds = req.body.cartId;
-    console.log(req.body);
+    // console.log(req.body);
     for(let i=0;i<cartIds.length;i++){
         var sql = 'DELETE FROM shopcart WHERE cartId = ?';
         db.query(sql,[cartIds[i]],(err,results)=>{
