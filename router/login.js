@@ -176,22 +176,7 @@ login.post('/delGoods',(req,res)=>{
         }
     })
 })
-// 结算后删除购物车内商品操作接口
-login.post('/delShopCart',(req,res)=>{
-    var cartIds = req.body.cartId;
-    // console.log(req.body);
-    for(let i=0;i<cartIds.length;i++){
-        var sql = 'DELETE FROM shopcart WHERE cartId = ?';
-        db.query(sql,[cartIds[i]],(err,results)=>{
-            if(err) return console.log(err.message);
-            if(results.affectedRows == 1){
-                if(i==0){
-                    res.send("删除成功")
-                }
-            }
-        })
-    }
-})
+
 
 
 // 跳转进花店的接口
