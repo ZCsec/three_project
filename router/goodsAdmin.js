@@ -69,8 +69,10 @@ goodsAdmin.post('/updateGoods',(req,res)=>{
 })
 
 // 删除商品操作 
-goodsAdmin.post('/delGoods',(req,res)=>{
-    console.log(req.query);
+goodsAdmin.post('/delGoodsAdmin',(req,res)=>{
+    // console.log(req.body);
+    // console.log(req.query);
+    // console.log(req);
     var sql = 'delete from goods where goodsId=?'
     var url = `http://127.0.0.1:3000/admin/getGoodsAll?userType=${req.query.userType}&userId=${req.query.userId}&page=${req.query.page}`;
     db.query(sql,[req.query.nowGoodsId],(err,results)=>{
@@ -80,5 +82,7 @@ goodsAdmin.post('/delGoods',(req,res)=>{
         }
     })
 })
+
+
 
 module.exports = goodsAdmin;

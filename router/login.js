@@ -167,7 +167,7 @@ login.post('/updateShopCart',(req,res)=>{
 // 购物车页面内删除操作接口
 login.post('/delGoods',(req,res)=>{
     var cartIds = req.body.cartId;
-    console.log(req.body);
+    // console.log(req.body);
     var sql = 'DELETE FROM shopcart WHERE cartId = ?';
     db.query(sql,[cartIds],(err,results)=>{
         if(err) return console.log(err.message);

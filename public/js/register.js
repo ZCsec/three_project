@@ -27,6 +27,7 @@ window.addEventListener('load', function () {
     var btnClick2 = false;
     var btnClick3 = false;
     var btnClick4 = false;
+    var btnClick5 = false;
 
     let p1 = document.querySelector('.p-1')
     username.addEventListener('blur', function () {
@@ -90,6 +91,12 @@ window.addEventListener('load', function () {
     })
     let p5 = document.querySelector('.p-5')
 
+    // var radios = document.querySelectorAll(".sex-text");
+    // for(var i=0;i<radios.length;i++){
+    //     if(radios[])
+    // }
+
+
     dlanniu.addEventListener('click', function (e) {
         if(btnClick1 && btnClick2 && btnClick3 && btnClick4){
             if (username.value != '' && passwords[0].value != '' && passwords[1].value != '' ) {
@@ -97,11 +104,15 @@ window.addEventListener('load', function () {
                 var userName = document.querySelector(".username").value;
                 var userPwd = document.querySelectorAll(".password")[0].value;
                 var sexs = document.querySelectorAll(".sex-text input");
-                for(let i = 0;i<sexs;i++){
+                console.log(sexs);
+                for(var i = 0;i<sexs.length;i++){
+                    // console.log(666);
                     if(sexs[i].checked){
                         var userSex = sexs[i].value;
+                        // log(sexs[i])
                     }
                 }
+                // console.log(userSex);
                 var params = {
                     userName:userName,
                     userPwd:userPwd,
@@ -119,6 +130,8 @@ window.addEventListener('load', function () {
                         setTimeout(() => {
                             window.location.href = "../static/login.html"
                         }, 2000);
+                    }else if(res.data == "该用户名已存在!"){
+                        layer.msg('用户名已存在!'); 
                     }
                 })
                 

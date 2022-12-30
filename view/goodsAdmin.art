@@ -122,7 +122,7 @@
     <!-- 删除确认弹出框 -->
     <div class="modal fade confirm-modal" id="delModal">
         <div class="modal-dialog modal-lg">
-            <form class="modal-content" id="delForm"  method="post" action="http://127.0.0.1:3000/admin/delGoods?nowGoodsId=">
+            <form class="modal-content" id="delForm"  method="post" action="http://127.0.0.1:3000/admin/delGoodsAdmin?nowGoodsId=">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                     <h4 class="modal-title">请确认</h4>
@@ -137,6 +137,7 @@
             </form>
         </div>
     </div>
+
     <!-- /删除确认弹出框 -->
     <script src="../static/lib/jquery/dist/jquery.min.js"></script>
     <script src="../static/lib/bootstrap/js/bootstrap.min.js"></script>
@@ -165,15 +166,16 @@
             var page = $(ev.relatedTarget).attr('data-page');
             var delUserBtn = document.querySelector('.delUserBtn');
             //var href = $('#delForm').prop('action');
-            var href = 'http://127.0.0.1:3000/admin/delGoods?nowGoodsId=';
+            var href = 'http://127.0.0.1:3000/admin/delGoodsAdmin?nowGoodsId=';
             
+
             // 当点击按钮确认删除时，才会拼接链接
             delUserBtn.addEventListener('click',function(){
                 // var action = href + stuNo + '&page=' + page;
                 var action = href + nowGoodsId + '&userId=' + userId + '&userType=' + userType + '&page=' + page;
                 console.log(action)
-                // 将form表单的action属性拼接并设置好
                 $('#delForm').attr('action',action)
+                // 将form表单的action属性拼接并设置好
             })
         })
     </script>
