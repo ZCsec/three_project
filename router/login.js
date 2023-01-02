@@ -197,6 +197,68 @@ login.get('/goodList',async(req,res)=>{
     
 })
 
+
+// 后台查询接口
+login.post('/goodListSearch',async(req,res)=>{
+    // console.log(req.body.content);
+    console.log(req.query);
+    var content ='%' + req.body.content + '%' || req.query.searchContent;
+
+    // 获取当前页数
+    var searchPage = req.query.searchPage || 1;
+
+    // 每页显示数量
+    var pageSize = 9;
+    // 总条数
+    var count = await getP(content);
+    // 总页数
+    var total = Math.ceil(count/pageSize);
+    // console.log(req.body.content);
+    // console.log(req.query);
+    var sql = 'SELECT * FROM goods WHERE goodsName LIKE ? limit ?,?';
+    db.query(sql,[content,(searchPage-1)*pageSize,pageSize],(err,results)=>{
+        if(err) return console.log(err.message);
+        res.render("goodslistSearch",{goodsMsg:results,userId:req.query.userId,userType:req.query.userType,searchPage:searchPage,total:total,searchContent:content,province:req.query.province})
+    })
+})
+
+login.get('/goodListSearch',async(req,res)=>{
+    // console.log(req.query);
+
+    // 此处content中文转码问题待解决
+    var content ='%' + req.body.content + '%' || req.query.searchContent;
+
+    // 获取当前页数
+    var searchPage = req.query.searchPage || 1;
+
+    // 每页显示数量
+    var pageSize = 9;
+    // 总条数
+    var count = await getP(content);
+    // 总页数
+    var total = Math.ceil(count/pageSize);
+    // console.log(req.body.content);
+    // console.log(req.query);
+    var sql = 'SELECT * FROM goods WHERE goodsName LIKE ? limit ?,?';
+    db.query(sql,[content,(searchPage-1)*pageSize,pageSize],(err,results)=>{
+        if(err) return console.log(err.message);
+        res.render("goodslistSearch",{goodsMsg:results,userId:req.query.userId,userType:req.query.userType,searchPage:searchPage,total:total,searchContent:content})
+    })
+})
+
+// 数据总数
+function getP(content){
+    var p = new Promise((resolve,reject)=>{
+        var sql = "select count(*) as count from goods where goodsName like ?"
+        db.query(sql,[content],(err,results)=>{
+            if(err) return console.log(err.message);
+            resolve(results[0].count)
+        })
+    })
+    return p
+}
+
+
 // 数据总数
 var p = new Promise((resolve,reject)=>{
     var sql = "select count(*) as count from goods"

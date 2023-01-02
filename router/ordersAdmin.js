@@ -13,9 +13,15 @@ ordersAdmin.get('/getOrdersAll',async(req,res)=>{
     var count = await p;
     // 总页数
     var total = Math.ceil(count/pageSize);
-    var sql = 'select * from orders limit ?,?'
+    var sql = 'SELECT orderId,goodsAll,orderPrice,orders.userId,orderState,orderTime,userAddress FROM orders JOIN USER ON orders.`userId` = user.`userId` LIMIT ?,?'
     db.query(sql,[(page-1)*pageSize,pageSize],(err,results)=>{
         if(err) return console.log(err.message);
+        // console.log(typeof(results[0].goodsAll));
+        for(var i=0;i<results.length;i++){
+            results[i].goodsAll = JSON.parse(results[i].goodsAll)
+            results[i].orderTime = moment(results[i].orderTime).format('YYYY-MM-DD HH:mm:ss')
+        }
+        // console.log(typeof(results[0].goodsAll));
         res.render("ordersAdmin",{ordersData:results,userId:req.query.userId,userType:req.query.userType,page:page,total:total})
     })
 })
@@ -92,5 +98,73 @@ function formatDate(result){
     }
     return result;
 }
+
+
+// 后台查询接口
+ordersAdmin.post('/getSearchOrders',async(req,res)=>{
+    // console.log(req.body.content);
+    var content = '%' + req.body.content + '%' || req.query.searchContent;
+
+    // 获取当前页数
+    var searchPage = req.query.searchPage || 1;
+
+    // 每页显示数量
+    var pageSize = 10;
+    // 总条数
+    var count = await getP(content);
+    // 总页数
+    var total = Math.ceil(count/pageSize);
+    var sql = 'SELECT * FROM orders WHERE goodsAll LIKE ? limit ?,?';
+    db.query(sql,[content,(searchPage-1)*pageSize,pageSize],(err,results)=>{
+        if(err) return console.log(err.message);
+        for(var i=0;i<results.length;i++){
+            results[i].goodsAll = JSON.parse(results[i].goodsAll)
+            results[i].orderTime = moment(results[i].orderTime).format('YYYY-MM-DD HH:mm:ss')
+        }
+        // console.log(results);
+        res.render("orderSearch",{ordersData:results,userId:req.query.userId,userType:req.query.userType,searchPage:searchPage,total:total,searchContent:content})
+    })
+})
+
+// 后台查询接口
+ordersAdmin.get('/getSearchOrders',async(req,res)=>{
+    // console.log(req.query.searchContent);
+    var content = req.query.searchContent;
+
+    // 获取当前页数
+    var searchPage = req.query.searchPage || 1;
+
+    // 每页显示数量
+    var pageSize = 10;
+    // 总条数
+    var count = await getP(content);
+    // 总页数
+    var total = Math.ceil(count/pageSize);
+    var sql = 'SELECT * FROM orders WHERE goodsAll LIKE ? limit ?,?';
+    db.query(sql,[content,(searchPage-1)*pageSize,pageSize],(err,results)=>{
+        if(err) return console.log(err.message);
+        for(var i=0;i<results.length;i++){
+            results[i].goodsAll = JSON.parse(results[i].goodsAll)
+            results[i].orderTime = moment(results[i].orderTime).format('YYYY-MM-DD HH:mm:ss')
+        }
+        // console.log(results);
+        res.render("orderSearch",{ordersData:results,userId:req.query.userId,userType:req.query.userType,searchPage:searchPage,total:total,searchContent:content})
+    })
+})
+
+
+// 数据总数
+function getP(content){
+    var p = new Promise((resolve,reject)=>{
+        var sql = "select count(*) as count from orders where goodsAll like ?"
+        db.query(sql,[content],(err,results)=>{
+            if(err) return console.log(err.message);
+            resolve(results[0].count)
+        })
+    })
+    return p
+}
+
+
 
 module.exports = ordersAdmin;

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/goodslist.css">
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet" />
+
+    <style>
+        .backTop {
+            display: block;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: blueviolet;
+            text-align: center;
+            position: fixed;
+            right: 2%;
+            bottom: 20%;
+            z-index: 9999999;
+            display: none;
+        }
+
+        .foot li a:hover {
+            color: #CC2121;
+            transform: translateX(10px);
+            transition: all 0.5s linear;
+        }
+
+        .sy {
+            display: block;
+            width: 20px;
+            height: 20px;
+        }
+
+        .sy img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <!-- 头部欢迎、语言选择、支付货币选择部分 -->
+        <div class="header-top">
+            <!-- 欢迎 -->
+            <div class="head-left">
+                <p>欢迎来到Floda线上商店!</p>
+            </div>
+            <div class="head-right">
+                <!-- 语言选择 -->
+                <!-- 语言选择 -->
+            <ul class="lang">
+                    <!-- 地址选择 -->
+                    <li class="address">
+                        {{if province != null}}
+                            <span style="font-weight:bold;color:#A31A1A" id="setAddress">{{province}}</span>
+                        {{else}}
+                            <span style="font-weight:bold;color:#A31A1A" id="setAddress">设置地址</span>
+                        {{/if}}
+                        <div  id = "addressBox">
+                            <span class="glyphicon glyphicon-remove" id="closeBtn"></span>
+                            <div class="addressBox2">
+                                <form class="form-inline" method="post" action="http://127.0.0.1:3000/admin/setAddress?userType={{userType}}&userId={{userId}}&province={{province}}"> 
+                                    <div data-toggle="distpicker"> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="province1">Province</label> 
+                                            <select class="form-control" name="province" id="province1"></select> 
+                                        </div> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="city1">City</label> 
+                                            <select class="form-control" name="city" id="city1"></select> 
+                                        </div> 
+                                        <div class="form-group"> 
+                                            <label class="sr-only" for="district1">District</label> 
+                                            <select class="form-control" name="district" id="district1"></select> 
+                                        </div> 
+                                            <div class="form-group" style="display:block;width:100%;margin:10px 0">
+                                            <label for="exampleInputName2">详细地址</label>
+                                            <input style="width:80%" type="text" class="form-control" id="exampleInputEmail1" name="addressMsg" placeholder="请输入详细地址">
+                                        </div>
+                                            <div style="margin:10px 0;width:100%;">
+                                            <label for="exampleInputName2">收件人</label>
+                                            <input style="width:80%;margin-left:10px" type="text" class="form-control" id="exampleInputEmail1" name="userMsg" placeholder="请输入收件人名称">
+                                        </div>
+                                            <div  style="margin:10px 0;width:100%;">
+                                            <label for="exampleInputName2">联系电话</label>
+                                            <input style="width:80%" type="text" class="form-control" id="exampleInputEmail1" name="phoneMsg" placeholder="请输入联系电话">
+                                        </div>
+                                        <div class="form-group;width:100%;">
+                                            <button class="btn btn-default" style="width:80px" type="submit">确认</button>
+                                        </div>
+                                    </div> 
+                                </form> 
+                            </div>
+                        </div>
+                    </li>
+                    <!-- 语言选择 -->
+                    <li>
+                        <span>语言</span>
+                        中文
+                    </li>
+                    <!-- 货币选择 -->
+                    <li>
+                        <span>支付货币</span>
+                        人民币￥
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="top-main">
+            <!-- logo -->
+            <div class="logo">
+                <a href="#">
+                    <img src="../static/img/logo/logo.png">
+                </a>
+            </div>
+            <div class="top-main-mid">
+                <!-- 导航栏 -->
+                <ul class="nav">
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/loginType?userType={{userType}}&userId={{userId}}&province={{province}}">
+                            首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/goodList?&userType={{userType}}&userId={{userId}}&province={{province}}">
+                            花店
+                        </a>
+                    </li>
+                    <li>
+                        <a style="width:100px" href="http://127.0.0.1:3000/admin/goodsDetail?goodsId=1&userType={{userType}}&userId={{userId}}&province={{province}}">
+                            产品细节
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="top-main-right">
+                <!-- 搜索、个人、喜欢、购物车 -->
+                <ul>
+                    <li style="display:none">
+                        <a href="#">
+                            <i class="sous">
+                                <img src="../static/img/搜索.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                    <li class="searchLi">
+                        <form class="form-inline" id="search-box" method="post" action="http://127.0.0.1:3000/admin/goodListSearch?page={{page}}&userId={{userId}}&userType={{userType}}&province={{province}}">
+                            <div class="form-group" id="search-text">
+                                <label for="exampleInputName2"></label>
+                                <input style="" type="text" class="form-control" name="content" id="exampleInputName2" placeholder="搜索商品信息(请输入关键字)">
+                            </div>
+                            <button type="submit" class="btn btn-default">搜索</button>
+                        </form>
+                    </li>
+                    <li style="display:{{userType==1?"none":"none"}}>
+                        <a href="login.html" style="display:{{userType==1?"none":"none"}} >
+                            <i class="self" style="display:{{userType==1?"none":"none"}}>
+                                <img src="../static/img/个人.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://127.0.0.1:3000/admin/getShopCart?userId={{userId}}&userType={{userType}}&province={{province}}">
+                            <i class="cart">
+                                <img src="../static/img/购物车.png" alt="" width="100%">
+                            </i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="goods-tit">
+        <div class="tii-main">
+            <h1>购物商店</h1>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html" class="sy">
+                        <img src="../static/img/主页.png" alt="">
+                    </a></li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #CC2121;">/&nbsp;购物商店</li>
+            </ul>
+        </div>
+    </div>
+    <div class="goods-main">
+        <div class="main-left">
+            <div class="categories">
+                <div class="sidebar-body">
+                    <h3>类别</h3>
+                    <ul class="shop-categories">
+                        <li><a href="#">茉莉花 <span>10</span></a></li>
+                        <li><a href="#">玫瑰花 <span>5</span></a></li>
+                        <li><a href="#">兰花 <span>8</span></a></li>
+                        <li><a href="#">鲜花 <span>4</span></a></li>
+                        <li><a href="#">风信子 <span>5</span></a></li>
+                        <li><a href="#">花束 <span>2</span></a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="color" style="margin-top: 30px;">
+                <div class="sidebar-body">
+                    <h3>尺寸</h3>
+                    <ul class="shop-categories" style="display: flex; flex-direction: column;">
+                        <li style="line-height: 30px;">
+                            <input type="checkbox" id="ck" style="margin-right: 10px;">
+                            <label for="ck">S(4)</label>
+                            </input>
+                        </li>
+                        <li style="line-height: 30px;">
+                            <input type="checkbox" id="ck" style="margin-right: 10px;">
+                            <label for="ck">M(5)</label>
+                            </input>
+                        </li>
+                        <li style="line-height: 30px;">
+                            <input type="checkbox" id="ck" style="margin-right: 10px;">
+                            <label for="ck">L(7)</label>
+                            </input>
+                        </li>
+                        <li style="line-height: 30px;">
+                            <input type="checkbox" id="ck" style="margin-right: 10px;">
+                            <label for="ck">XL(3)</label>
+                            </input>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="gg" style="margin-top: 30px;">
+                <div class="ggimg">
+                    <a href="#">
+                        <img src="../static/img/banner/sidebar-banner.jpg" width="100%">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="main-right">
+            <div class="change-list" style="margin-left: 20px;">
+                <a href="#">grid mode </a>/
+                <a href="#"> list mode</a>
+            </div>
+            <div class="grid">
+            <!-- 此处需要模板 -->
+                {{each goodsMsg}}
+                <div class="product-item1">
+                    <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{province}}">
+                        <img src="../static/img/product/{{$value.goodsImgSrc}}" alt="">
+                    </a>
+                    <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{province}}" class="product-name">
+                        {{$value.goodsName}}
+                    </a>
+                    <span class="price-regular">${{$value.goodsPrice}} <del style="color: rgba(0, 0, 0, 0.3);">$70.00</del></span>
+                    <div class="new">
+                        <span>new</span>
+                    </div>
+                    <div class="discount">
+                        <span>30%</span>
+                    </div>
+                    <div class="addcar">
+                        <a href="http://127.0.0.1:3000/admin/goodsDetail?goodsId={{$value.goodsId}}&userType={{userType}}&userId={{userId}}&province={{province}}">
+                            <img src="../static/img/购物车.png" style="border: none;">
+                        </a>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            <div class="paginatoin-area text-center">
+                <ul class="pagination-box">
+                    <li style="display:{{searchPage>1?"inline":"none"}};border:1px solid red;"><a class="previous" href="http://127.0.0.1:3000/admin/goodListSearch?searchPagee={{searchPage-0-1}}&userType={{userType}}&userId={{userId}}&province={{province}}&searchContent={{searchContent}}">&lt;</a></li>
+                    <% for(var i=1;i<=total;i++){ %>
+                    <li style="border:{{searchPage==i?"1px solid black":"none"}}" class="active"><a href="http://127.0.0.1:3000/admin/goodListSearch?searchPage=<%=i%>&province={{province}}&searchContent={{searchContent}}"><%=i%></a></li>
+                    <% } %>
+                    <li style="display:{{searchPage==total?"none":"inline"}};border:1px solid red;"><a class="next" href="http://127.0.0.1:3000/admin/goodListSearch?searchPage={{searchPagepage-0+1}}&userType={{userType}}&userId={{userId}}&province={{province}}&searchContent={{searchContent}}">&gt;</a></li>
+                </ul>
+            </div>
+        </div>
+        <a href="javascript:" class="backTop">
+            <img src="../static/img/箭头 上.png" width="80%">
+        </a>
+    </div>
+    <!-- 尾部信息 -->
+    <div class="foot">
+        <div class="foot-left">
+            <!-- 联系方式 -->
+            <ul class="aboutus">
+                <h5>联系方式</h5>
+                <li class="address">
+                    地址 :
+                    澳大利亚维多利亚州圣奥尔本斯大街
+                </li>
+                <li class="email">
+                    邮箱 :
+                    <a href="mailto:test@yourdomain.com">&nbsp;yourmail@gmail.com</a>
+                </li>
+                <li class="phone">
+                    电话 :
+                    <a href="tel:(012)800456789-987">&nbsp;(012) 800 456 789-987</a>
+                </li>
+            </ul>
+            <img src="../static/img/payment-pic.png" alt="">
+        </div>
+        <!-- 服务和关于我们 -->
+        <div class="foot-mid">
+            <ul class="mid-main">
+                <h5>服务类型</h5>
+                <li><a href="#">电子商务</a></li>
+                <li><a href="#">shopify</a></li>
+                <li><a href="#">Prestashop</a></li>
+                <li><a href="#">Opencart</a></li>
+                <li><a href="#">线上购物</a></li>
+            </ul>
+            <ul class="mid-main">
+                <h5>关于我们</h5>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">客服</a></li>
+                <li><a href="#">航运</a></li>
+            </ul>
+        </div>
+        <!-- 快速访问 -->
+        <div class="foot-right">
+            <ul class="right-main">
+                <h5>快速访问</h5>
+                <li><a href="#">存储位置</a></li>
+                <li><a href="#">我的账户</a></li>
+                <li><a href="#">订单跟踪</a></li>
+                <li><a href="#">订花技巧</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="http://www.jq22.com/jquery/1.11.1/jquery.min.js"></script> 
+<script src="http://www.jq22.com/jquery/bootstrap-3.3.4.js"></script> 
+<script src="../static/js/distpicker.data.js"></script> 
+<script src="../static/js/distpicker.js"></script>  
+<script>
+    var header = document.querySelector(".top-main");
+    var backTop = document.querySelector(".backTop")
+    // 获取搜索框
+    var searchLi = document.querySelector(".searchLi");
+    searchLi.style.display = "none"
+    window.addEventListener("scroll", function () {
+        var topScroll = document.body.scrollTop || document.documentElement.scrollTop;//滚动的距离,距离顶部的距离
+        var space = document.querySelector(".goods-tit");
+        var spaceOffsetHeight = space.offsetTop
+        console.log(spaceOffsetHeight, 'navOffsetHeight')
+        if (topScroll > spaceOffsetHeight) {
+            header.style.position = 'fixed';
+            header.style.top = '0';
+            header.style.zIndex = '9999';
+            header.style.backgroundColor = "white"
+            header.style.width = "100%"
+            backTop.style.display = "block"
+            searchLi.style.display = "block"
+        } else {
+            header.style.position = 'static';
+            backTop.style.display = "none"
+            searchLi.style.display = "none"
+        }
+    })
+
+    backTop.addEventListener("click", function () {
+        //toTop 滚动到顶部
+        var currentPosition, timer;
+        var speed = 10;
+        timer = setInterval(function () {
+            currentPosition = document.documentElement.scrollTop || document.body.scrollTop;
+            currentPosition -= speed; //speed变量
+            if (currentPosition > 0) {
+                window.scrollTo(0, currentPosition);
+            } else {
+                window.scrollTo(0, 0);
+                clearInterval(timer);
+            }
+        }, 1);
+    })
+</script>
+<script>
+    var setAddress = document.querySelector("#setAddress");
+    var addressBox = document.querySelector("#addressBox");
+    var closeBtn = document.querySelector("#closeBtn");
+
+    setAddress.addEventListener("click",function(){
+        addressBox.style.display = "block";
+    })
+
+    closeBtn.addEventListener("click",function(){
+        addressBox.style.display = "none";
+    })
+</script>
+
+</html>

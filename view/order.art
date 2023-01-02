@@ -176,91 +176,95 @@
         </div>
     </div>
 
-    <div class="content content-nav-base shopcart-content">
-        <div class="cart w1200">
-            <div class="cart-table-th">
+    {{if payMsg.length != 0}}
+        <div class="content content-nav-base shopcart-content">
+            <div class="cart w1200">
+                <div class="cart-table-th">
 
-                <div class="th th-item">
-                    <div class="th-inner">
-                        订单编号
+                    <div class="th th-item">
+                        <div class="th-inner">
+                            订单编号
+                        </div>
+                    </div>
+                    <div class="th th-price">
+                        <div class="th-inner">
+                            商品信息
+                        </div>
+                    </div>
+                    <div class="th th-amount">
+                        <div class="th-inner">
+                            订单金额
+                        </div>
+                    </div>
+                    <div class="th th-Id">
+                        <div class="th-inner">
+                            订单地址
+                        </div>
+                    </div>
+                    <div class="th th-amount">
+                        <div class="th-inner">
+                            订单状态
+                        </div>
+                    </div>
+                    <div class="th th-amount">
+                        <div class="th-inner">
+                            订单时间
+                        </div>
                     </div>
                 </div>
-                <div class="th th-price">
-                    <div class="th-inner">
-                        商品信息
-                    </div>
-                </div>
-                <div class="th th-amount">
-                    <div class="th-inner">
-                        订单金额
-                    </div>
-                </div>
-                <div class="th th-Id">
-                    <div class="th-inner">
-                        订单地址
-                    </div>
-                </div>
-                <div class="th th-amount">
-                    <div class="th-inner">
-                        订单状态
-                    </div>
-                </div>
-                <div class="th th-amount">
-                    <div class="th-inner">
-                        订单时间
-                    </div>
-                </div>
-            </div>
-            <div class="OrderList">
-                {{each payMsg}}
-                    <div class="order-content" id="list-cont">
-                        
-                        <ul class="item-content layui-clear" style="position:relative"> 
-                            <li class="th th-item">
-                                <div class="item-cont">
-                                    <div class="text">
-                                        <div class="title">{{$value.orderId}}</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="th th-price">
-                                {{each $value.goodsAll}}
-                                    <div class="th-su" style="margin:20px 0;display:flex;position:relative;top:-50px">
-                                        <p style="width:50%;display:inline-block">
-                                            <img style="width:50%;border:2px solid #000" src="../static/img/product/{{$value.goodsImgSrc}}">
-                                        </p>
-                                        <div style="display:inline-block;text-align:left;height:125px">
-                                            <p style="height:33%">名称:<span style="font-weight:bold;margin-left:5px">{{$value.goodsName}}</span></p>
-                                            <p style="height:33%">尺寸:<span style="font-weight:bold;margin-left:5px">{{$value.goodsSize}}</span></p>
-                                            <p style="height:33%">数量:<span style="font-weight:bold;margin-left:5px">{{$value.goodsNum}}</span></p>
+                <div class="OrderList">
+                    {{each payMsg}}
+                        <div class="order-content" id="list-cont">
+                            
+                            <ul class="item-content layui-clear" style="position:relative"> 
+                                <li class="th th-item">
+                                    <div class="item-cont">
+                                        <div class="text">
+                                            <div class="title">{{$value.orderId}}</div>
                                         </div>
                                     </div>
-                                {{/each}}
-                            </li>
-                            <li class="th th-amount">
-                                <div class="box-btn layui-clear">
-                                    {{$value.orderPrice}}
-                                </div>
-                            </li>
-                            <li class="th th-sum">
-                                <span class="sum">{{$value.userAddress}}</span>
-                            </li>
-                            <li class="th th-op">
-                                <span class="dele-btn">{{$value.orderState}}</span>
-                            </li>
-                            <li class="th th-op">
-                                <span class="dele-btn">{{$value.orderTime}}</span>
-                            </li>
-                            <li style="position:absolute;right:50px;bottom:0px">
-                                <a style="background-color:#D13434;display:inline-block;width:60px;height:30px;line-height:30px;text-align:center;color:#fff" href="http://127.0.0.1:3000/admin/delWaitPay?orderId={{$value.orderId}}&userId={{userId}}&userType={{userType}}&province={{province}}" >删除</a>
-                                <a style="background-color:skyblue;display:inline-block;width:60px;height:30px;line-height:30px;text-align:center;color:#fff" href="http://127.0.0.1:3000/admin/getPayOrder?orderId={{$value.orderId}}&orderTime={{$value.orderTime}}&userId={{userId}}&userType={{userType}}&province={{province}}" >结算</a>
-                            </li>
-                        </ul>
-                    </div>
-                {{/each}}
+                                </li>
+                                <li class="th th-price">
+                                    {{each $value.goodsAll}}
+                                        <div class="th-su" style="margin:20px 0;display:flex;position:relative;top:-50px">
+                                            <p style="width:50%;display:inline-block">
+                                                <img style="width:50%;border:2px solid #000" src="../static/img/product/{{$value.goodsImgSrc}}">
+                                            </p>
+                                            <div style="display:inline-block;text-align:left;height:125px">
+                                                <p style="height:33%">名称:<span style="font-weight:bold;margin-left:5px">{{$value.goodsName}}</span></p>
+                                                <p style="height:33%">尺寸:<span style="font-weight:bold;margin-left:5px">{{$value.goodsSize}}</span></p>
+                                                <p style="height:33%">数量:<span style="font-weight:bold;margin-left:5px">{{$value.goodsNum}}</span></p>
+                                            </div>
+                                        </div>
+                                    {{/each}}
+                                </li>
+                                <li class="th th-amount">
+                                    <div class="box-btn layui-clear">
+                                        {{$value.orderPrice}}
+                                    </div>
+                                </li>
+                                <li class="th th-sum">
+                                    <span class="sum">{{$value.userAddress}}</span>
+                                </li>
+                                <li class="th th-op">
+                                    <span class="dele-btn">{{$value.orderState}}</span>
+                                </li>
+                                <li class="th th-op">
+                                    <span class="dele-btn">{{$value.orderTime}}</span>
+                                </li>
+                                <li style="position:absolute;right:50px;bottom:0px">
+                                    <a style="background-color:#D13434;display:inline-block;width:60px;height:30px;line-height:30px;text-align:center;color:#fff" href="http://127.0.0.1:3000/admin/delWaitPay?orderId={{$value.orderId}}&userId={{userId}}&userType={{userType}}&province={{province}}" >删除</a>
+                                    <a style="background-color:skyblue;display:inline-block;width:60px;height:30px;line-height:30px;text-align:center;color:#fff" href="http://127.0.0.1:3000/admin/getPayOrder?orderId={{$value.orderId}}&orderTime={{$value.orderTime}}&userId={{userId}}&userType={{userType}}&province={{province}}" >结算</a>
+                                </li>
+                            </ul>
+                        </div>
+                    {{/each}}
+                </div>
             </div>
         </div>
-    </div>
+    {{else}}
+        <div style="border:3px solid #888;line-height:100px;text-align:center;font-size:24px">暂时没有新订单...</div>
+    {{/if}}
     <a href="javascript:" class="backTop">
         <img src="../static/img/箭头 上.png" width="80%">
     </a>

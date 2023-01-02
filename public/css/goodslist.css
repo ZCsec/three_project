@@ -17,6 +17,37 @@ ul li {
 }
 
 
+#search-box{
+	/* border:1px solid red; */
+	position:absolute;
+	left:22%;
+	bottom:0;
+	width:600px;
+	height: 40px;
+}
+
+.disClick{
+	pointer-events: none !important;
+}
+
+.hasClick{
+	pointer-events: auto !important;
+}
+
+
+#search-text{
+	width: 90%;
+	/* border: 1px solid red; */
+	position: relative;
+	top: -8px;
+}
+
+#exampleInputName2{
+	width: 100%;
+	position: absolute;
+}
+
+
 #setAddress{
     cursor: pointer;
 }
@@ -25,6 +56,15 @@ ul li {
     position: relative;
 }
 
+
+.btn-default{
+    position: relative;
+    top: -31px;
+    left: 214px;
+    /* outline: 1px solid red; */
+    /* top: 10px; */
+    /* right: 10px; */
+}
 
 #addressBox{
     /* border: 1px solid red; */

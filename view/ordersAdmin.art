@@ -65,8 +65,15 @@
         <div class="main">
         	<!-- 分类标题 -->
             <div class="title">
-                <h4>用户</h4>
+                <h4>订单</h4>
                 <span class="title">找到{{ordersData.length}}个订单</span>
+                <form class="form-inline" id="search-box" method="post" action="http://127.0.0.1:3000/admin/getSearchOrders?page={{page}}&userId={{userId}}&userType={{userType}}">
+                    <div class="form-group" id="search-text">
+                        <label for="exampleInputName2"></label>
+                        <input style="" type="text" class="form-control" name="content" id="exampleInputName2" placeholder="搜索订单信息(请输入关键字)">
+                    </div>
+                    <button type="submit" class="btn btn-default">搜索</button>
+                </form>
                 <a href="http://127.0.0.1:3000/admin/getOrderType?type=1&userType={{userType}}&userId={{userId}}&page={{page}}" class="btn btn-primary new">新增订单</a>
             </div>
             <!-- /分类标题 -->
@@ -87,7 +94,21 @@
                 {{each ordersData}}
                 <tr>
                     <td>{{$value.orderId}}</td>
-                    <td>{{$value.goodsAll}}</td>
+                    <td>
+                        {{each $value.goodsAll}}
+                            <div style="width:200px;height:100px;margin:10px 0;display:flex">
+                                <div style="width:50%">
+                                    <img src="../static/img/product/{{$value.goodsImgSrc}}" style="width:100%;border:1px solid #ccc">
+                                </div>
+                                <div style="width:50%;margin-left:10px"  >
+                                    <p>商品名：{{$value.goodsName}}</p>
+                                    <p>尺&nbsp;&nbsp;&nbsp;寸：{{$value.goodsSize}}</p>
+                                    <p>数&nbsp;&nbsp;&nbsp;量：{{$value.goodsNum}}</p>
+                                    
+                                </div>
+                            </div>
+                        {{/each}}
+                    </td>
                     <td>{{$value.orderPrice}}</td>
                     <td>{{$value.userId}}</td>
                     <td>{{$value.userAddress}}</td>

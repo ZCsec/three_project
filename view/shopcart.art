@@ -442,6 +442,7 @@
                                     data:params
                                 }).then((res)=>{
                                     // console.log("请求发送完成")
+                                    location.reload()
                                 })
                                 totalPrice()
 

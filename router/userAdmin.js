@@ -1,6 +1,9 @@
 const express = require('express')
 const userAdmin = express.Router();
 const db = require('../connect/connection')
+const iconv = require('iconv-lite')
+const encoding = require('encoding')
+const entities = require('html-entities')
 
 userAdmin.get('/getUserType',(req,res)=>{
     var type = req.query.type;
@@ -66,7 +69,7 @@ userAdmin.post('/delUser',(req,res)=>{
 
 // 后台查询接口
 userAdmin.post('/getSearchUser',async(req,res)=>{
-    var content = req.body.content + '%' || req.query.searchContent;
+    var content ='%' + req.body.content + '%' || req.query.searchContent;
 
     // 获取当前页数
     var searchPage = req.query.searchPage || 1;
@@ -88,7 +91,8 @@ userAdmin.post('/getSearchUser',async(req,res)=>{
 // 后台查询接口
 userAdmin.get('/getSearchUser',async(req,res)=>{
     var content = req.query.searchContent;
-
+    console.log(content);
+    content = content.substring(0,content.length-1)
     // 获取当前页数
     var searchPage = req.query.searchPage || 1;
 
@@ -99,9 +103,10 @@ userAdmin.get('/getSearchUser',async(req,res)=>{
     // 总页数
     var total = Math.ceil(count/pageSize);
     // console.log(req.body.content);
-    // console.log(req.query);
+
     var sql = 'SELECT * FROM user WHERE userName LIKE ? limit ?,?';
     db.query(sql,[content,(searchPage-1)*pageSize,pageSize],(err,results)=>{
+        // console.log(results);
         if(err) return console.log(err.message);
         res.render("userSearch",{usersData:results,userId:req.query.userId,userType:req.query.userType,searchPage:searchPage,total:total,searchContent:content})
     })

@@ -142,12 +142,21 @@
             <div class="top-main-right">
                 <!-- 搜索、个人、喜欢、购物车 -->
                 <ul>
-                    <li>
+                    <li style="display:none">
                         <a href="#">
                             <i class="sous">
                                 <img src="../static/img/搜索.png" alt="" width="100%">
                             </i>
                         </a>
+                    </li>
+                    <li class="searchLi">
+                        <form class="form-inline" id="search-box" method="post" action="http://127.0.0.1:3000/admin/goodListSearch?page={{page}}&userId={{userId}}&userType={{userType}}&province={{province}}">
+                            <div class="form-group" id="search-text">
+                                <label for="exampleInputName2"></label>
+                                <input style="" type="text" class="form-control" name="content" id="exampleInputName2" placeholder="搜索商品信息(请输入关键字)">
+                            </div>
+                            <button type="submit" class="btn btn-default">搜索</button>
+                        </form>
                     </li>
                     <li style="display:{{userType==1?"none":"none"}}>
                         <a href="login.html" style="display:{{userType==1?"none":"none"}} >
@@ -193,70 +202,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="brand">
-                <div class="sidebar-body">
-                    <h3>品牌</h3>
-                    <ul class="shop-categories" style="display: flex; flex-direction: column;">
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">f工作室(3)</label>
-                            </input>
-                        </li>
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">Hastech(4)</label>
-                            </input>
-                        </li>
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">Quickiin(15)</label>
-                            </input>
-                        </li>
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">图形的角落(10)</label>
-                            </input>
-                        </li>
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">DevItems(12)</label>
-                            </input>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="color" style="margin-top: 30px;">
-                <div class="sidebar-body">
-                    <h3>颜色</h3>
-                    <ul class="shop-categories" style="display: flex; flex-direction: column;">
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">黑色(20)</label>
-                            </input>
-                        </li>
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">红色(6)</label>
-                            </input>
-                        </li>
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">蓝色(8)</label>
-                            </input>
-                        </li>
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">绿色(5)</label>
-                            </input>
-                        </li>
-                        <li style="line-height: 30px;">
-                            <input type="checkbox" id="ck" style="margin-right: 10px;">
-                            <label for="ck">粉红(4)</label>
-                            </input>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
             <div class="color" style="margin-top: 30px;">
                 <div class="sidebar-body">
                     <h3>尺寸</h3>
@@ -395,7 +341,10 @@
 <script src="../static/js/distpicker.js"></script>  
 <script>
     var header = document.querySelector(".top-main");
-    var backTop = document.querySelector(".backTop")
+    var backTop = document.querySelector(".backTop");
+    // 获取搜索框
+    var searchLi = document.querySelector(".searchLi");
+    searchLi.style.display = "none"
     window.addEventListener("scroll", function () {
         var topScroll = document.body.scrollTop || document.documentElement.scrollTop;//滚动的距离,距离顶部的距离
         var space = document.querySelector(".goods-tit");
@@ -408,9 +357,11 @@
             header.style.backgroundColor = "white"
             header.style.width = "100%"
             backTop.style.display = "block"
+            searchLi.style.display = "block"
         } else {
             header.style.position = 'static';
             backTop.style.display = "none"
+            searchLi.style.display = "none"
         }
     })
 
